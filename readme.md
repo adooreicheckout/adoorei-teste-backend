@@ -6,9 +6,9 @@
 
 # Desafio desenvolvedor back-end
 
-Seja muito bem-vindo(a), futuro desenvovledor da Adoorei.
+Seja muito bem-vindo(a), futuro desenvolvedor da Adoorei.
 
-Nós, recrutadores juntamente com a nossa equipe de EGENHARIA, desenvolvemos um teste prático para conhecer um pouco mais sobre suas habilidade 
+Nós, recrutadores juntamente com a nossa equipe de ENGENHARIA, desenvolvemos um teste prático para conhecer um pouco mais sobre suas habilidade 
 
 
 
@@ -18,7 +18,7 @@ Utilizando o  <a href=“https://laravel.com/docs/10.x“>Laravel</a> cria uma A
 
 A Loja ABC LTDA, vende produtos de diferentes nichos. No momento precisamos registrar a venda de celulares.
 
-Não vamos nos preucupar com o cadastro de produtos, porém precisamos ter uma tabela em nosso banco contendo os aparelhos celulares que vão ser vendidos, por exemplo:
+Não vamos nos preocupar com o cadastro de produtos, porém precisamos ter uma tabela em nosso banco contendo os aparelhos celulares que vão ser vendidos, por exemplo:
 
 ```json
 [
