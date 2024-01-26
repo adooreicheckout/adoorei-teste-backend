@@ -22,3 +22,25 @@ php artisan migrate
 ```sh
 php artisan db:seed
 ```
+
+# Rotas
+## Filtros para listagem
+- Filtros disponiveis
+    - Exemplo:
+        - /products?name[eq]=nome&value[gt]=5000
+```php
+'gt' => '>'
+'gte' => '>='
+'lt' => '<'
+'lte' => '<='
+'eq' => '='
+'ne' => '!='
+'in' => 'in'
+'lk' => 'like'
+```
+
+# GET /products
+Devolve uma lista de produtos
+- Query params
+    - opicional
+    - parametros de filtros
