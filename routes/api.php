@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Product\ProductController;
+use App\Http\Controllers\Api\SaleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('products', [ProductController::class, 'index']);
+Route::get('sales', [SaleController::class, 'index']);

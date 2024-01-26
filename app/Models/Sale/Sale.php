@@ -13,4 +13,8 @@ class Sale extends Model
         'amount',
         'sale_status_id'
     ];
+    public static $allowedOperatorsFields = [
+        'sale_status_id' => ['eq', 'in'],
+        'amount' => ['gt', 'gte', 'lt', 'lte', 'eq', 'in']
+    ];
 }
