@@ -29,10 +29,12 @@ trait HttpResponse
             $message = $message->value;
         }
 
-        return response()->json([
+        $response = [
             'message' => $message,
             'status' => $status,
             'data' => $data
-        ], $status);
+        ];
+
+        return response()->json($response, $status);
     }
 }
