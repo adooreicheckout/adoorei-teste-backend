@@ -11,13 +11,9 @@ class ProductService
 
     public function all(Request $request)
     {
-        $allowedOperatorsFields = [
-            'name' => ['eq', 'in', 'lk'],
-            'price' => ['gt', 'gte', 'lt', 'lte', 'eq', 'in']
-        ];
-
-        $filters = (new Filter($allowedOperatorsFields));
         $products = Product::query();
+
+        $filters = (new Filter(Product::$allowedOperatorsFields));
         $filters->build($products, $request);
 
         return $products->orderBy('id', 'desc')->paginate(2);

@@ -14,4 +14,8 @@ class Product extends Model
         'price',
         'description'
     ];
+    public static $allowedOperatorsFields = [
+        'name' => ['eq', 'in', 'lk'],
+        'price' => ['gt', 'gte', 'lt', 'lte', 'eq', 'in']
+    ];
 }
