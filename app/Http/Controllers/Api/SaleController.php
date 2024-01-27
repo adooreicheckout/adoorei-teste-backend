@@ -40,8 +40,8 @@ class SaleController extends Controller
     {
         $sale = $this->service->create($request->all());
         return $this->success(
-            MessagesResponse::OK,
-            Response::HTTP_OK,
+            MessagesResponse::CREATED,
+            Response::HTTP_CREATED,
             new SaleResource($sale)
         );
     }
@@ -51,6 +51,19 @@ class SaleController extends Controller
      */
     public function show(string $id)
     {
+        $sale = $this->service->findById($id);
+        return $this->success(
+            MessagesResponse::OK,
+            Response::HTTP_OK,
+            new SaleResource($sale)
+        );
+    }
 
+    public function destroy(string $id) {
+        $sale = $this->service->delete($id);
+        return $this->success(
+            MessagesResponse::DELETED,
+            Response::HTTP_NO_CONTENT
+        );
     }
 }

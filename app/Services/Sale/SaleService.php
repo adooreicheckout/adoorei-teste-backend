@@ -48,4 +48,14 @@ class SaleService
 
         return $sale->load('products');
     }
+
+    public function findById(string $id)
+    {
+        return Sale::with('products')->findOrFail($id);
+    }
+
+    public function delete(string $id)
+    {
+        return Sale::destroy($id);
+    }
 }
