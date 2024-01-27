@@ -15,6 +15,11 @@ class VendasModel extends Model
 
     protected $fillable = [
         'amount',
+        'status'
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
     ];
 
     public function products(){

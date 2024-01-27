@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::apiResource('products', 'ProdutosController')->names('api.products')->parameters([
     'products' => 'produto'
 ]);
+
+Route::get('sales/cancel/{venda}', 'VendasController@cancelSale')->name('api.sales.cencel');
 
 Route::apiResource('sales', 'VendasController')->names('api.sales')->parameters([
     'sales' => 'venda'

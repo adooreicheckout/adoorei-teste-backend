@@ -15,6 +15,12 @@ class VendasController extends Controller
     public function index()
     {
         $vendas = VendasModel::all()->load('products');
+
+        $vendas->products->map(function($a){
+            dump($a);
+        });
+
+        dd("Aqui");
         
         return response()->json($vendas, Response::HTTP_OK);
     }
@@ -25,7 +31,18 @@ class VendasController extends Controller
     public function store(Request $request)
     {
         $dados = $request->input();
-        $produtos = $dados['products'];
+        $dados['amount'] = 0;
+
+        $produtos = collect($dados['products'])->map(function($prod) use(&$dados){
+            //Trada os dados eviados pelo front para um formato float valido
+            $prod['price'] = (float) str_replace('.', '', $prod['price']);
+
+            $dados['amount'] += $prod['amount'] * $prod['price'];
+
+            return $prod;
+        });
+
+
 
         DB::transaction(function() use($dados, $produtos){
             $venda = VendasModel::create($dados);
@@ -51,8 +68,15 @@ class VendasController extends Controller
         
         $dados = $request->input();
         $produtos = $dados['products'];
+        $dados['amount'] = 0;
 
-        $dados['amount'] = array_sum(array_map(function($prod){return $prod['amount'] * $prod['price'];}, $produtos));
+        $produtos = collect($dados['products'])->map(function($prod) use(&$dados){
+            //Trada os dados eviados pelo front para um formato float valido
+            $prod['amount'] = str_replace('.', '', $prod['amount']);
+            $dados['amount'] += $prod['amount'] * $prod['price'];
+
+            return $prod;
+        });
 
         DB::transaction(function() use($venda, $dados, $produtos){
             $venda->update($dados);
@@ -74,5 +98,15 @@ class VendasController extends Controller
         });
 
         return response()->json(['msg' => 'deletado com sucesso'], Response::HTTP_NO_CONTENT);
+    }
+
+    public function cancelSale(VendasModel $venda){
+        if($venda->status){
+            $venda->update(['status' => 0]);
+        }else{
+            return response()->json(['msg' => "Venda {$venda->id} já se encontra cancelada"], Response::HTTP_OK);
+        }
+
+        return response()->json(['msg' => "Venda {$venda->id} cancelada!"], Response::HTTP_OK);
     }
 }
