@@ -2,7 +2,6 @@
 
 namespace App\Observers\Sale;
 
-use App\Models\Product;
 use App\Models\Sale\Sale;
 
 class SaleObserver
