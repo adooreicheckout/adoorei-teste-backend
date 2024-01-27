@@ -11,10 +11,11 @@ RUN apt-get update && apt-get install -y \
 # Habilitar o módulo de reescrita do Apache
 RUN a2enmod rewrite
 
-RUN chmod +x /var/www/html
 # Copia os arquivos para o diretório de trabalho
 COPY app /var/www/html/
 
+RUN chmod -R 775 /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 

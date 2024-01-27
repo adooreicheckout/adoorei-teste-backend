@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('products', 'ProdutosController')->names('api.products')->parameters([
+    'products' => 'produto'
+]);
+
+Route::apiResource('sales', 'VendasController')->names('api.sales')->parameters([
+    'sales' => 'venda'
+]);
