@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Apple iPhone 14 (128 GB) – Estelar',
                 'price' => 4299.0,
-                'description' => 'Reprodução de vídeo: até 20 horas Reprodução de vídeo (streaming): até 16 horas Reprodução de áudio: até 80 horas Adaptador de 20 W ou superior (vendido separadamente) Capacidade de carregamento rápido: até 50% de carga em cerca de 30 minutos com adaptador de 20 W ou superior (disponível separadamente)'
+                'description' => 'Reprodução de vídeo: até 20 horas Reprodução de vídeo (streaming): até 16 horas Reprodução de áudio'
             ],
             [
                 'id' => 2,
@@ -30,7 +30,7 @@ class ProductSeeder extends Seeder
                 'id' => 3,
                 'name' => 'iPhone 11 Apple 64GB Preto 6,1” 12MP iOS',
                 'price' => 2681.10,
-                'description' => 'Grave vídeos 4K, faça belos retratos e capture paisagens inteiras com o novo sistema de câmera dupla. Tire fotos incríveis com pouca luz usando o modo Noite. Veja cores fiéis em fotos, vídeos e jogos na tela Liquid Retina de 6,1 polegadas'
+                'description' => 'Grave vídeos 4K, faça belos retratos e capture paisagens inteiras com o novo sistema de câmera dupla.'
             ]
         ];
 
