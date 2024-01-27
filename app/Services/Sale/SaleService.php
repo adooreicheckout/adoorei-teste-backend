@@ -22,9 +22,9 @@ class SaleService
         return $sales->with(['products'])->orderBy('id', 'desc')->paginate(2);
     }
 
-    public function create(array $data): Sale|null
+    public function create(array $data): Sale
     {
-        $sale = null;
+        $sale = new Sale();
         $amounts = [];
         $sum = 0;
         /**
@@ -35,7 +35,7 @@ class SaleService
         }
 
         DB::transaction(function () use ($data, &$sale, $amounts, &$sum) {
-            $sale = Sale::with('products')->create(['sale_status_id' => SaleStatus::IN_PROGRESS]);
+            $sale = Sale::create(['sale_status_id' => SaleStatus::IN_PROGRESS]);
             $sale->products()->attach($data['products']);
 
             $sale->products()->each(function($product) use (&$sum, $amounts) {
@@ -46,6 +46,6 @@ class SaleService
             $sale->save();
         });
 
-        return $sale;
+        return $sale->load('products');
     }
 }

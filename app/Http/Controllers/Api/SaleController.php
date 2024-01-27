@@ -39,7 +39,11 @@ class SaleController extends Controller
     public function store(StorePostSaleRequest $request)
     {
         $sale = $this->service->create($request->all());
-        return response()->json($sale->with('products'));
+        return $this->success(
+            MessagesResponse::OK,
+            Response::HTTP_OK,
+            new SaleResource($sale)
+        );
     }
 
     /**
