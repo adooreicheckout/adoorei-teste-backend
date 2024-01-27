@@ -16,12 +16,22 @@ class VendasController extends Controller
     {
         $vendas = VendasModel::all()->load('products');
 
-        $vendas->products->map(function($a){
-            dump($a);
+        $vendas = $vendas->map(function($venda){
+            return [
+                'sales_id' => $venda->id,
+                'amount' => $venda->amount,
+                'status' => $venda->status,
+                'products' => $venda->products->map(function($prod) {
+                    return [
+                        'product_id' => $prod->id,
+                        'nome' => $prod->name,
+                        'price' => $prod->pivot->price,
+                        'amount' => $prod->pivot->amount,
+                    ];
+                })
+            ];
         });
 
-        dd("Aqui");
-        
         return response()->json($vendas, Response::HTTP_OK);
     }
 
@@ -33,18 +43,15 @@ class VendasController extends Controller
         $dados = $request->input();
         $dados['amount'] = 0;
 
-        $produtos = collect($dados['products'])->map(function($prod) use(&$dados){
+        $produtos = collect($dados['products'])->map(function ($prod) use (&$dados) {
             //Trada os dados eviados pelo front para um formato float valido
-            $prod['price'] = (float) str_replace('.', '', $prod['price']);
-
+            $prod['price'] = (float) str_replace(',', '.', $prod['price']);
             $dados['amount'] += $prod['amount'] * $prod['price'];
 
             return $prod;
         });
 
-
-
-        DB::transaction(function() use($dados, $produtos){
+        DB::transaction(function () use ($dados, $produtos) {
             $venda = VendasModel::create($dados);
             $venda->products()->attach($produtos);
         });
@@ -57,7 +64,24 @@ class VendasController extends Controller
      */
     public function show(VendasModel $venda)
     {
-        return response()->json($venda->load('products'), Response::HTTP_OK);
+        
+        $venda->load('products');
+        
+        $venda = [
+            'sales_id' => $venda->id,
+            'amount' => $venda->amount,
+            'status' => $venda->status,
+            'products' => $venda->products->map(function($prod) {
+                return [
+                    'product_id' => $prod->id,
+                    'nome' => $prod->name,
+                    'price' => $prod->pivot->price,
+                    'amount' => $prod->pivot->amount,
+                ];
+            })
+        ];       
+        
+        return response()->json($venda, Response::HTTP_OK);
     }
 
     /**
@@ -65,20 +89,20 @@ class VendasController extends Controller
      */
     public function update(Request $request, VendasModel $venda)
     {
-        
+
         $dados = $request->input();
         $produtos = $dados['products'];
         $dados['amount'] = 0;
 
-        $produtos = collect($dados['products'])->map(function($prod) use(&$dados){
+        $produtos = collect($dados['products'])->map(function ($prod) use (&$dados) {
             //Trada os dados eviados pelo front para um formato float valido
-            $prod['amount'] = str_replace('.', '', $prod['amount']);
+            $prod['amount'] = str_replace(',', '.', $prod['amount']);
             $dados['amount'] += $prod['amount'] * $prod['price'];
 
             return $prod;
         });
 
-        DB::transaction(function() use($venda, $dados, $produtos){
+        DB::transaction(function () use ($venda, $dados, $produtos) {
             $venda->update($dados);
             $venda->products()->detach();
             $venda->products()->attach($produtos);
@@ -92,7 +116,7 @@ class VendasController extends Controller
      */
     public function destroy(VendasModel $venda)
     {
-        DB::transaction(function() use($venda){
+        DB::transaction(function () use ($venda) {
             // $venda->products()->detach();
             $venda->delete();
         });
@@ -100,10 +124,11 @@ class VendasController extends Controller
         return response()->json(['msg' => 'deletado com sucesso'], Response::HTTP_NO_CONTENT);
     }
 
-    public function cancelSale(VendasModel $venda){
-        if($venda->status){
+    public function cancelSale(VendasModel $venda)
+    {
+        if ($venda->status) {
             $venda->update(['status' => 0]);
-        }else{
+        } else {
             return response()->json(['msg' => "Venda {$venda->id} já se encontra cancelada"], Response::HTTP_OK);
         }
 
