@@ -58,4 +58,12 @@ class SaleService
     {
         return Sale::destroy($id);
     }
+
+    public function cancel(string $id)
+    {
+        $sale = $this->findById($id);
+        $sale->update(['sale_status_id' => SaleStatus::CANCELED]);
+
+        return $sale;
+    }
 }

@@ -6,11 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Services\Sale\SaleService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Enums\Messages\Http\Response as MessagesResponse;
+use App\Enums\Messages\Sale\SaleMessage;
 use App\Http\Requests\Sale\StorePostSaleRequest;
 use App\Http\Resources\Sale\SaleCollection;
 use App\Http\Resources\Sale\SaleResource;
-use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
@@ -27,7 +26,7 @@ class SaleController extends Controller
         $sales = $this->service->all($request);
 
         return $this->success(
-            MessagesResponse::OK,
+            SaleMessage::OK,
             Response::HTTP_OK,
             (new SaleCollection($sales))->response()->getData(true)
         );
@@ -40,7 +39,7 @@ class SaleController extends Controller
     {
         $sale = $this->service->create($request->all());
         return $this->success(
-            MessagesResponse::CREATED,
+            SaleMessage::CREATED,
             Response::HTTP_CREATED,
             new SaleResource($sale)
         );
@@ -53,17 +52,27 @@ class SaleController extends Controller
     {
         $sale = $this->service->findById($id);
         return $this->success(
-            MessagesResponse::OK,
+            SaleMessage::OK,
             Response::HTTP_OK,
             new SaleResource($sale)
         );
     }
 
     public function destroy(string $id) {
-        $sale = $this->service->delete($id);
+        $this->service->delete($id);
         return $this->success(
-            MessagesResponse::DELETED,
-            Response::HTTP_NO_CONTENT
+            SaleMessage::DELETED,
+            Response::HTTP_OK
+        );
+    }
+
+    public function cancel(string $id)
+    {
+        $this->service->cancel($id);
+
+        return $this->success(
+            SaleMessage::CANCELED,
+            Response::HTTP_OK,
         );
     }
 }

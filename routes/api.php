@@ -25,3 +25,4 @@ Route::get('sales', [SaleController::class, 'index']);
 Route::get('sales/{id}', [SaleController::class, 'show']);
 Route::delete('sales/{id}', [SaleController::class, 'destroy']);
 Route::post('sales', [SaleController::class, 'store']);
+Route::put('sales/cancel/{id}', [SaleController::class, 'cancel']);

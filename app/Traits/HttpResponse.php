@@ -9,12 +9,8 @@ use Illuminate\Support\MessageBag;
 
 trait HttpResponse
 {
-    public function error(string|MessageResponse $message, string|int $status = Response::HTTP_BAD_REQUEST, array|MessageBag $errors = [], $content = [])
+    public function error(string $message, string|int $status = Response::HTTP_BAD_REQUEST, array|MessageBag $errors = [], $content = [])
     {
-        if ($message instanceof MessageResponse) {
-            $message = $message->value;
-        }
-
         return response()->json([
             'message' => $message,
             'status' => $status,
@@ -23,12 +19,8 @@ trait HttpResponse
         ], $status);
     }
 
-    public function success(string|MessageResponse $message, int $status, array|JsonResource $content = [])
+    public function success(string $message, int $status, array|JsonResource $content = [])
     {
-        if ($message instanceof MessageResponse) {
-            $message = $message->value;
-        }
-
         $response = [
             'message' => $message,
             'status' => $status,
