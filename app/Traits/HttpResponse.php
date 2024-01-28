@@ -2,14 +2,13 @@
 
 namespace App\Traits;
 
-use App\Enums\Messages\Http\Response as MessageResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\MessageBag;
 
 trait HttpResponse
 {
-    public function error(string $message, string|int $status = Response::HTTP_BAD_REQUEST, array|MessageBag $errors = [], $content = [])
+    public function error(string $message, string|int $status = Response::HTTP_BAD_REQUEST, array|MessageBag|string $errors = [], $content = [])
     {
         return response()->json([
             'message' => $message,

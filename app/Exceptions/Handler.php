@@ -2,11 +2,15 @@
 
 namespace App\Exceptions;
 
+use App\Traits\HttpResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use HttpResponse;
     /**
      * The list of the inputs that are never flashed to the session on validation exceptions.
      *
@@ -25,6 +29,14 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (NotFoundHttpException $e) {
+            return $this->error(
+                "Record sought does not exist",
+                Response::HTTP_NOT_FOUND,
+                $e->getMessage()
+            );
         });
     }
 }
