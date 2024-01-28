@@ -7,7 +7,7 @@ use App\Services\Sale\SaleService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Enums\Messages\Sale\SaleMessage;
-use App\Http\Requests\Sale\StorePostSaleRequest;
+use App\Http\Requests\Sale\SaleRequest;
 use App\Http\Resources\Sale\SaleCollection;
 use App\Http\Resources\Sale\SaleResource;
 
@@ -35,7 +35,7 @@ class SaleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostSaleRequest $request)
+    public function store(SaleRequest $request)
     {
         $sale = $this->service->create($request->all());
         return $this->success(
@@ -73,6 +73,17 @@ class SaleController extends Controller
         return $this->success(
             SaleMessage::CANCELED,
             Response::HTTP_OK,
+        );
+    }
+
+    public function addProducts(SaleRequest $request, string $id)
+    {
+        $sale = $this->service->addProducts($request->all(), $id);
+
+        return $this->success(
+            SaleMessage::CREATED,
+            Response::HTTP_CREATED,
+            new SaleResource($sale)
         );
     }
 }

@@ -6,6 +6,7 @@ use App\Enums\Sale\SaleStatus;
 use App\Http\Filters\Filter;
 use App\Models\Product;
 use App\Models\Sale\Sale;
+use App\Models\Sale\SaleProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,45 +26,76 @@ class SaleService
     public function create(array $data): Sale
     {
         $sale = new Sale();
-        $amounts = [];
-        $sum = 0;
-        /**
-         * array $products = ['product_id' => 1, 'amount' => 2 ]
-        */
-        foreach ($data['products'] as $products) {
-            $amounts[$products['product_id']] = $products['amount'];
-        }
 
-        DB::transaction(function () use ($data, &$sale, $amounts, &$sum) {
+        DB::transaction(function () use ($data, &$sale) {
             $sale = Sale::create(['sale_status_id' => SaleStatus::IN_PROGRESS]);
             $sale->products()->attach($data['products']);
 
-            $sale->products()->each(function($product) use (&$sum, $amounts) {
-                $sum += $product->price * $amounts[$product->id];
-            });
-
-            $sale->amount = $sum;
+            $sale->amount = $this->sumTotalAmount($sale);
             $sale->save();
         });
 
         return $sale->load('products');
     }
 
-    public function findById(string $id)
+    public function addProducts(array $data, string $id)
+    {
+        $sale = $this->findById($id);
+        $newProducts = [];
+        $updateProducts = [];
+
+        DB::transaction(function () use ($data, &$sale, &$newProducts, &$updateProducts) {
+            $productAlreadyExists = array_flip($sale->products()->allRelatedIds()->toArray());
+
+            foreach ($data['products'] as $product) {
+                if (array_key_exists($product['product_id'], $productAlreadyExists)) {
+                    $updateProducts[] = $product;
+                } else {
+                    $newProducts[] = $product;
+                }
+            }
+
+            if (!empty($newProducts)) {
+                $sale->products()->attach($newProducts);
+            }
+
+            if (!empty($updateProducts)) {
+                foreach ($updateProducts as $product) {
+                    $sale->products()->updateExistingPivot($product['product_id'], $product);
+                }
+            }
+
+            $sale->amount = $this->sumTotalAmount($sale);
+            $sale->save();
+        });
+
+        return $sale->load('products');
+    }
+
+    public function findById(string $id): Sale
     {
         return Sale::with('products')->findOrFail($id);
     }
 
-    public function delete(string $id)
+    public function delete(string $id): int
     {
         return Sale::destroy($id);
     }
 
-    public function cancel(string $id)
+    public function cancel(string $id): Sale
     {
         $sale = $this->findById($id);
         $sale->update(['sale_status_id' => SaleStatus::CANCELED]);
 
         return $sale;
+    }
+
+    private function sumTotalAmount(Sale $sale)
+    {
+        $sum = 0;
+        $sale->products()->each(function($product) use (&$sum) {
+            $sum += $product->price * $product->pivot->amount;
+        });
+        return $sum;
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Sale;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostSaleRequest extends FormRequest
+class SaleRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
