@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class Filter
 {
     // ?paid[eq]=1&type[eq]=[C,p]&value[gt]=5000
-    protected array $allowedOperatorsFields = [];
-    protected array $translateOperatorsFields = [
+    private array $allowedOperatorsFields = [];
+    private array $translateOperatorsFields = [
         'gt' => '>',
         'gte' => '>=',
         'lt' => '<',
@@ -42,7 +42,8 @@ class Filter
             if ($queryOperator && is_array($queryOperator)) {
                 foreach ($queryOperator as $operator => $value) {
                     if (!in_array($operator, $operators)) {
-                        throw new Exception("{$param} does not have {$operator} operator");
+                        // $param does not have {$operator} operator;
+                        continue;
                     }
 
                     if (str_contains($value, '[')) {
