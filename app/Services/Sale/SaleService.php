@@ -21,7 +21,7 @@ class SaleService
         $filters = (new Filter(Sale::$allowedOperatorsFields));
         $filters->build($sales, $request);
 
-        return $sales->with(['products'])->orderBy('id', 'desc')->paginate(2);
+        return $sales->with(['products'])->orderBy('id', 'desc')->paginate(config('api.paginate'));
     }
 
     public function create(array $data): Sale

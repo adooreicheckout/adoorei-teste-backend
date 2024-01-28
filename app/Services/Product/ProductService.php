@@ -16,6 +16,6 @@ class ProductService
         $filters = (new Filter(Product::$allowedOperatorsFields));
         $filters->build($products, $request);
 
-        return $products->orderBy('id', 'desc')->paginate(2);
+        return $products->orderBy('id', 'desc')->paginate(config('api.paginate'));
     }
 }
