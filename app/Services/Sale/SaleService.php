@@ -3,6 +3,7 @@
 namespace App\Services\Sale;
 
 use App\Enums\Sale\SaleStatus;
+use App\Exceptions\Sale\SaleAddProductException;
 use App\Http\Filters\Filter;
 use App\Models\Product;
 use App\Models\Sale\Sale;
@@ -41,6 +42,8 @@ class SaleService
     public function addProducts(array $data, string $id)
     {
         $sale = $this->findById($id);
+        SaleStatusService::checkIfCanAddProductsByStatus($sale);
+
         $newProducts = [];
         $updateProducts = [];
 

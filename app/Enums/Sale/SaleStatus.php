@@ -2,9 +2,9 @@
 
 namespace App\Enums\Sale;
 
-enum SaleStatus: int
+abstract class SaleStatus
 {
-    case IN_PROGRESS = 1;
-    case COMPLETE = 2;
-    case CANCELED = 3;
+    const IN_PROGRESS = 1;
+    const COMPLETE = 2;
+    const CANCELED = 3;
 }
