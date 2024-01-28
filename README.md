@@ -39,8 +39,58 @@ php artisan db:seed
 'lk' => 'like'
 ```
 
-# GET /products
+# GET /api/products ......................... Api\Product\ProductController@index
 Devolve uma lista de produtos
 - Query params
     - opicional
     - parametros de filtros
+
+# GET /sales ......................... Api\SaleController@index
+Devolve uma lista de vendas
+- Query params
+    - opicional
+    - parametros de filtros
+# POST /api/sales ......................... Api\SaleController@store
+Cria um novo produto
+- Body Params
+```json
+{
+	"products": [
+		{
+			"product_id": 2,
+			"amount": 2
+		}
+	]
+}
+```
+# GET /api/sales/{id} ......................... Api\SaleController@show
+Devolve uma venda especifica
+- Route Params
+    - id da venda buscada
+# PUT /api/sales/{id}/add/products ......................... Api\SaleController@addProducts
+Adiciona produtos e uma venda (caso já exista, apenas atualiza a quantidade)
+- Route Params
+    - id da venda buscada
+- Body Params
+```json
+{
+	"products": [
+		{
+			"product_id": 2,
+			"amount": 1
+		},
+        {
+            "product_id": 1,
+            "amount": 2
+        }
+	]
+}
+```
+# PUT /api/sales/{id}/cancel ......................... Api\SaleController@cancel
+Cancela uma venda
+- Route Params
+    - id da venda buscada
+# DELETE /api/sales/{id} ......................... Api\SaleController@destroy
+Deleta uma venda
+- Route Params
+    - id da venda buscada
