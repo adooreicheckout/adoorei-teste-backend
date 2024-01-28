@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\SaleController;
+use App\Http\Controllers\Api\Sale\SaleController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(SaleController::class)->group(function () {
