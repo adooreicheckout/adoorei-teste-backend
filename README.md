@@ -23,6 +23,15 @@ php artisan migrate
 php artisan db:seed
 ```
 
+# Documentação
+Basta acessar a página inicial do app no browser
+- Usado insomnia-documenter
+- Para atualizar arquivo base de documentação com base num novo arquivo json
+    - exportar do insomnia para /docs/insomnia.json
+```sh
+npm run build-docs
+```
+
 # Rotas
 ## Filtros para listagem
 - Filtros disponiveis
