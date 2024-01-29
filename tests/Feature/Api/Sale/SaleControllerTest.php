@@ -6,7 +6,6 @@ use App\Enums\Messages\Message;
 use App\Enums\Messages\Sale\SaleMessage;
 use App\Models\Sale\Sale;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
