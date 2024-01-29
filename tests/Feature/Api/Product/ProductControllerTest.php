@@ -2,14 +2,8 @@
 
 namespace Tests\Feature\Api\Product;
 
-use App\Enums\Messages\Message;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\Response;
-use Illuminate\Testing\Fluent\AssertableJson;
-use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class ProductControllerTest extends TestCase
@@ -86,16 +80,7 @@ class ProductControllerTest extends TestCase
         ];
     }
 
-    private function hasPatternApi(TestResponse $response)
-    {
-        $response->assertOk();
-        $response->assertJson(fn (AssertableJson $json) =>
-            $json->hasAll(['message', 'status', 'content'])
-                ->missingAll(['errors'])
-        );
-        $response->assertJsonPath('message', Message::OK);
-        $response->assertJsonPath('status', Response::HTTP_OK);
-    }
+
 
     private function structureFilterByPrice(
         string $operator,
