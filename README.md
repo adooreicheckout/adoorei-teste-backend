@@ -1,4 +1,20 @@
-# Config envs
+# Requirements
+- php: "^8.1"
+- composer: "^2.4"
+- node: "^20.1"
+- npm: "^10.2"
+- mysql running local
+
+# Start app
+
+- Instale as depencias composer
+```sh
+composer install
+```
+- Instale as depencias node
+```sh
+npm install
+```
 - Duplique arquivo .env.example
 ```sh
 cp .env.example .env
@@ -23,6 +39,10 @@ php artisan migrate
 php artisan db:seed
 ```
 
+- Rode os testes
+```sh
+php artisan test
+```
 # Documentação
 Basta acessar a página inicial do app no browser
 - Usado insomnia-documenter
