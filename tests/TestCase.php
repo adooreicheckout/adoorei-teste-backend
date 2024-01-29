@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     protected $seed = true;
 
-    protected function hasPatternApi(TestResponse $response, $message = Message::OK, $httpStatus = Response::HTTP_OK)
+    protected function hasPatternSuccessApi(TestResponse $response, $message = Message::OK, $httpStatus = Response::HTTP_OK)
     {
         $response->assertOk();
         $response->assertJson(fn (AssertableJson $json) =>
@@ -22,6 +22,17 @@ abstract class TestCase extends BaseTestCase
         );
         $response->assertJsonPath('message', $message);
         $response->assertJsonPath('status', $httpStatus);
+    }
+
+    protected function indexRequest(string $route)
+    {
+        $response = $this->getJson($route);
+        $this->hasPatternSuccessApi($response);
+        return [
+            'response' => $response,
+            'content' => $response['content'],
+            'data' => $response['content']['data']
+        ];
     }
 
 }

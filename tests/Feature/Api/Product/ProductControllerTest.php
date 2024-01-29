@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api\Product;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductControllerTest extends TestCase
@@ -13,7 +12,7 @@ class ProductControllerTest extends TestCase
     public function test_if_list_is_working(): void
     {
         $response = $this->getJson('/api/products');
-        $this->hasPatternApi($response);
+        $this->hasPatternSuccessApi($response);
         $content = $response['content'];
         $this->assertNotEmpty($content['data']);
     }
@@ -69,19 +68,6 @@ class ProductControllerTest extends TestCase
         $this->structureFilterByPrice('in', 'iPhone 11 Apple 64GB Preto 6,1” 12MP iOS', 0, 2, $queryParam);
     }
 
-    private function indexRequest(string $route)
-    {
-        $response = $this->getJson($route);
-        $this->hasPatternApi($response);
-        return [
-            'response' => $response,
-            'content' => $response['content'],
-            'data' => $response['content']['data']
-        ];
-    }
-
-
-
     private function structureFilterByPrice(
         string $operator,
         string $nameCompare,
@@ -96,8 +82,9 @@ class ProductControllerTest extends TestCase
         $data = $request['data'];
 
         $this->assertNotEmpty($data);
+        $this->assertArrayNotHasKey($dataLength, $data);
         $this->assertEquals($data[$indexData]['name'], $nameCompare);
-        $this->assertEquals($dataLength, count($data));
+        $this->assertCount($dataLength, $data);
 
         return $request;
     }

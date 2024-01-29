@@ -18,7 +18,7 @@ class Sale extends Model
 
     public static $allowedOperatorsFields = [
         'sale_status_id' => ['eq', 'in'],
-        'amount' => ['gt', 'gte', 'lt', 'lte', 'eq', 'in']
+        'amount' => ['gt', 'gte', 'lt', 'lte', 'eq', 'in', 'ne']
     ];
 
     public function products(): BelongsToMany
