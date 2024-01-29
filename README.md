@@ -48,6 +48,11 @@ php artisan db:seed
 ```sh
 php artisan test
 ```
+
+- rode a aplicação
+```sh
+php artisan serve
+```
 # Documentação
 Basta acessar a página inicial do app no browser
 - Usado insomnia-documenter
@@ -135,3 +140,5 @@ Deleta uma venda
 - Api\SaleController@destroy
 - Route Params
     - id da venda buscada
+
+# Arquivos de documentação encontados em /docs
