@@ -48,6 +48,24 @@ class SaleControllerTest extends TestCase
         $this->assertEmpty($content);
     }
 
+    public function test_if_add_products_method_is_working()
+    {
+        $this->createSaleByRoute();
+        $response = $this->put('/api/sales/1/add/products', [
+            'products' => [
+                ['product_id' => 2, 'amount' => 1]
+            ]
+        ]);
+
+        $this->hasPatternSuccessApi($response, SaleMessage::ADD_PRODUCTS);
+        $content = $response['content'];
+        $this->assertNotEmpty($content);
+        $this->assertEquals($this->sumTotalAmount(), $content['amount']);
+        $this->assertArrayHasKey('products', $content);
+        $this->assertNotEmpty($content['products']);
+        $this->assertCount(2, $content['products']);
+    }
+
     public function test_if_index_method_is_working(): void
     {
         $this->createSaleByRoute();
@@ -141,6 +159,7 @@ class SaleControllerTest extends TestCase
         $this->hasPatternSuccessApi($response, Message::CREATED, Response::HTTP_CREATED);
         $content = $response['content'];
         $this->assertNotEmpty($content);
+        $this->assertEquals($this->sumTotalAmount(), $content['amount']);
         $this->assertArrayHasKey('products', $content);
         $this->assertNotEmpty($content['products']);
 
@@ -159,5 +178,16 @@ class SaleControllerTest extends TestCase
             '200' => $this->createSaleByModel(200),
             '300' => $this->createSaleByModel(300)
         ];
+    }
+
+    private function sumTotalAmount(string|int $id = 1)
+    {
+        $sale = Sale::with('products')->findOrFail($id);
+        $sum = 0;
+        $sale->products()->each(function($product) use (&$sum) {
+            $sum += $product->price * $product->pivot->amount;
+        });
+
+        return $sum;
     }
 }
