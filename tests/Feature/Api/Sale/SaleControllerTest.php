@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Sale;
+namespace Tests\Feature\Api\Sale;
 
 use App\Enums\Messages\Message;
 use App\Enums\Messages\Sale\SaleMessage;
