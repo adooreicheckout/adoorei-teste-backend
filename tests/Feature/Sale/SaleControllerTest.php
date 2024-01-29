@@ -13,12 +13,23 @@ class SaleControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_if_create_new_sale_is_working()
+    public function test_if_store_method_is_working()
     {
         $this->createSaleByRoute();
     }
 
-    public function test_if_list_is_working(): void
+    public function test_if_show_method_is_working()
+    {
+        $this->createSaleByRoute();
+        $response = $this->get('/api/sales/1');
+        $this->hasPatternSuccessApi($response);
+        $content = $response['content'];
+        $this->assertNotEmpty($content);
+        $this->assertArrayHasKey('products', $content);
+        $this->assertNotEmpty($content['products']);
+    }
+
+    public function test_if_index_method_is_working(): void
     {
         $this->createSaleByRoute();
         $response = $this->getJson('/api/sales');

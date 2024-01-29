@@ -9,7 +9,7 @@ class ProductControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_if_list_is_working(): void
+    public function test_if_index_method_is_working(): void
     {
         $response = $this->getJson('/api/products');
         $this->hasPatternSuccessApi($response);
