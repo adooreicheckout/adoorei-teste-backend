@@ -80,8 +80,8 @@ class Filter
             $builder->where($filters['where']);
         }
 
-        if (!empty($queryFilter['whereIn'])) {
-            foreach ($queryFilter['whereIn'] as $value) {
+        if (!empty($filters['whereIn'])) {
+            foreach ($filters['whereIn'] as $value) {
                 $builder->whereIn($value[0], $value[1]);
             }
         }
