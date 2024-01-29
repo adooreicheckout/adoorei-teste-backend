@@ -2,14 +2,21 @@
 
 namespace Tests\Feature\Sale;
 
+use App\Enums\Messages\Message;
 use App\Models\Sale\Sale;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class SaleControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_if_create_new_sale_is_working()
+    {
+        $this->createSaleByRoute();
+    }
 
     public function test_if_list_is_working(): void
     {
@@ -74,7 +81,6 @@ class SaleControllerTest extends TestCase
         $response = $this->structureFilterByAmount('in', 2, $queryParam);
         $this->assertTrue($response['data'][0]['amount'] == 200);
         $this->assertTrue($response['data'][1]['amount'] == 100);
-
     }
 
     private function structureFilterByAmount(
@@ -97,11 +103,18 @@ class SaleControllerTest extends TestCase
 
     private function createSaleByRoute()
     {
-        return $this->post('/api/sales', [
+        $response = $this->post('/api/sales', [
             'products' => [
                 ['product_id' => 1, 'amount' => 2]
             ]
         ]);
+        $this->hasPatternSuccessApi($response, Message::CREATED, Response::HTTP_CREATED);
+        $content = $response['content'];
+        $this->assertNotEmpty($content);
+        $this->assertArrayHasKey('products', $content);
+        $this->assertNotEmpty($content['products']);
+
+        return $response;
     }
 
     private function createSaleByModel(float $amount)

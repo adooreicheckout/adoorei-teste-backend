@@ -15,7 +15,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function hasPatternSuccessApi(TestResponse $response, $message = Message::OK, $httpStatus = Response::HTTP_OK)
     {
-        $response->assertOk();
+        $response->assertStatus($httpStatus);
         $response->assertJson(fn (AssertableJson $json) =>
             $json->hasAll(['message', 'status', 'content'])
                 ->missingAll(['errors'])
