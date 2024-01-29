@@ -29,6 +29,11 @@ mysql -uroot -proot
 create database adoorei character set utf8 collate utf8_unicode_ci;
 ```
 
+- gere a chave para  laravel
+```sh
+php artisan key:generate
+```
+
 - Rode as migrations
 ```sh
 php artisan migrate
