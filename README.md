@@ -68,19 +68,22 @@ npm run build-docs
 'lk' => 'like'
 ```
 
-# GET /api/products ......................... Api\Product\ProductController@index
+# GET /api/products 
 Devolve uma lista de produtos
+- Api\Product\ProductController@index
 - Query params
     - opicional
     - parametros de filtros
 
-# GET /sales ......................... Api\SaleController@index
+# GET /sales 
 Devolve uma lista de vendas
+- Api\SaleController@index
 - Query params
     - opicional
     - parametros de filtros
-# POST /api/sales ......................... Api\SaleController@store
+# POST /api/sales 
 Cria um novo produto
+- Api\SaleController@store
 - Body Params
 ```json
 {
@@ -92,12 +95,14 @@ Cria um novo produto
 	]
 }
 ```
-# GET /api/sales/{id} ......................... Api\SaleController@show
+# GET /api/sales/{id} 
 Devolve uma venda especifica
+- Api\SaleController@show
 - Route Params
     - id da venda buscada
-# PUT /api/sales/{id}/add/products ......................... Api\SaleController@addProducts
+# PUT /api/sales/{id}/add/products 
 Adiciona produtos e uma venda (caso já exista, apenas atualiza a quantidade)
+- Api\SaleController@addProducts
 - Route Params
     - id da venda buscada
 - Body Params
@@ -115,11 +120,13 @@ Adiciona produtos e uma venda (caso já exista, apenas atualiza a quantidade)
 	]
 }
 ```
-# PUT /api/sales/{id}/cancel ......................... Api\SaleController@cancel
+# PUT /api/sales/{id}/cancel 
 Cancela uma venda
+- Api\SaleController@cancel
 - Route Params
     - id da venda buscada
-# DELETE /api/sales/{id} ......................... Api\SaleController@destroy
+# DELETE /api/sales/{id} 
 Deleta uma venda
+- Api\SaleController@destroy
 - Route Params
     - id da venda buscada
