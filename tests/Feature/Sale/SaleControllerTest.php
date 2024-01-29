@@ -3,6 +3,7 @@
 namespace Tests\Feature\Sale;
 
 use App\Enums\Messages\Message;
+use App\Enums\Messages\Sale\SaleMessage;
 use App\Models\Sale\Sale;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -27,6 +28,24 @@ class SaleControllerTest extends TestCase
         $this->assertNotEmpty($content);
         $this->assertArrayHasKey('products', $content);
         $this->assertNotEmpty($content['products']);
+    }
+
+    public function test_if_destroy_method_is_working()
+    {
+        $this->createSaleByRoute();
+        $response = $this->delete('/api/sales/1');
+        $this->hasPatternSuccessApi($response, SaleMessage::DELETED);
+        $content = $response['content'];
+        $this->assertEmpty($content);
+    }
+
+    public function test_if_cancel_method_is_working()
+    {
+        $this->createSaleByRoute();
+        $response = $this->put('/api/sales/1/cancel');
+        $this->hasPatternSuccessApi($response, SaleMessage::CANCELED);
+        $content = $response['content'];
+        $this->assertEmpty($content);
     }
 
     public function test_if_index_method_is_working(): void

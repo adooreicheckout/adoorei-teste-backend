@@ -81,8 +81,8 @@ class SaleController extends Controller
         $sale = $this->service->addProducts($request->all(), $id);
 
         return $this->success(
-            SaleMessage::CREATED,
-            Response::HTTP_CREATED,
+            SaleMessage::ADD_PRODUCTS,
+            Response::HTTP_OK,
             new SaleResource($sale)
         );
     }
