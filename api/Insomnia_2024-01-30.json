@@ -1,0 +1,256 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2024-01-30T17:20:23.738Z",
+    "__export_source": "insomnia.desktop.app:v2023.5.8",
+    "resources": [
+        {
+            "_id": "req_cd210d7effd0473b85fd9b7998923f1e",
+            "parentId": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "modified": 1706627024668,
+            "created": 1706626988425,
+            "url": "{{ _.url }}/products",
+            "name": "LIST PRODUCTS",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706626988425,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "parentId": null,
+            "modified": 1706552932112,
+            "created": 1706552932112,
+            "name": "adoorei-teste-backend",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_01cc4e2fe6e44c3a9e740e2f0bd520b4",
+            "parentId": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "modified": 1706627043147,
+            "created": 1706626358457,
+            "url": "{{ _.url }}/sales/1",
+            "name": "DELETE SALE",
+            "description": "",
+            "method": "DELETE",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706626358457,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b9d9761392b64279b6fa082cd093ec4c",
+            "parentId": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "modified": 1706627047438,
+            "created": 1706625450518,
+            "url": "{{ _.url }}/sales/1",
+            "name": "UPDATE SALE ",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\": 3,\n\t\t\t\"name\": \"Celular 3\",\n\t\t\t\"amount\": 1\n\t\t}\n\t]\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706625450518,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_2c0624e3593a409591639463e5890012",
+            "parentId": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "modified": 1706627054148,
+            "created": 1706624894553,
+            "url": "{{ _.url }}/sales/1",
+            "name": "LIST-ONE-SALE",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706624894553,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_7be3a66f1a33488b9e69fb3018800a00",
+            "parentId": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "modified": 1706634998886,
+            "created": 1706553946090,
+            "url": "{{ _.url }}/sales",
+            "name": "CREATE SALE",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"name\": \"Celular 1\",\n\t\t\t\"amount\": 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"name\": \"Celular 2\",\n\t\t\t\"amount\": 2\n\t\t}\n\t]\n}\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706553946090,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b4d1eb241b3143cf8fff31891d5cda07",
+            "parentId": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "modified": 1706627066728,
+            "created": 1706552934976,
+            "url": "{{ _.url }}/sales",
+            "name": "LIST-SALE",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706552934976,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_66a8ef9ed3d7a9615474a27e2cd9e3a748daf757",
+            "parentId": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "modified": 1706627019789,
+            "created": 1706552932117,
+            "name": "Base Environment",
+            "data": {
+                "url": "http://localhost:80/api"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "url"
+                ]
+            },
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1706552932117,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_66a8ef9ed3d7a9615474a27e2cd9e3a748daf757",
+            "parentId": "wrk_aabdebd2e985441b8327103a3e4bf194",
+            "modified": 1706554278221,
+            "created": 1706552932120,
+            "name": "Default Jar",
+            "cookies": [
+                {
+                    "key": "XSRF-TOKEN",
+                    "value": "eyJpdiI6Ikk5VkNHcXdiMTRBcmxkdW1CVlhONFE9PSIsInZhbHVlIjoiSjZnL0JLRDE4R09laTZBalY5WTl1WDdITHhLSDU4MUdNQS9kZWhZRUJwMkQ5VytqbFZHWnd4czVrMVNVQUg1ZFJsQ3JLQ2JUWDNGa3NWZnBiYWREMUVnUWtTSjBxN3A0dXAvdlN6OFpWWlgwRlV0RWZqUHA1WkNjaUF2WjVkdWgiLCJtYWMiOiIzNDM2MjJiYmM1ZTU3OGJkMWEwNGU5MWIxMjEzOTI0YzUwZjZkMGI1YjdmN2QwNjU3ZjYyZWJiMDFkYWQ5MmFlIiwidGFnIjoiIn0%3D",
+                    "expires": "2024-01-29T20:51:18.000Z",
+                    "maxAge": 7200,
+                    "domain": "localhost",
+                    "path": "/",
+                    "hostOnly": true,
+                    "creation": "2024-01-29T18:47:59.116Z",
+                    "lastAccessed": "2024-01-29T18:51:18.221Z",
+                    "sameSite": "lax",
+                    "id": "7463944161353395"
+                },
+                {
+                    "key": "laravel_session",
+                    "value": "eyJpdiI6IlRNUVpzZms2ZlJYaDVMNSt2RmJZTnc9PSIsInZhbHVlIjoidlRIZkNXQVY5Ym9IazU3TlRGc3dlVjZIeGJ2WGdKcElTdDV3emMrZTlCTGwzMThrcUt5bWpGK2VETTkzbVdkVjlWRlh0b0R1ZTZoc1BXZGRGTktMaVpkbWhuNTl2dVp2RHJ4RjdQN1Nna3dQUXNIZnRONTNheXJFUlpUcm9QMlMiLCJtYWMiOiIwNDUxYTE1ZjgxZGVhZTYzOTgxYjhlMzUxMTBlNjA2NjE3MTMzZDlmMGI0YWI1NjEyMmIzYjM3OGFkZjE5ODQ3IiwidGFnIjoiIn0%3D",
+                    "expires": "2024-01-29T20:51:18.000Z",
+                    "maxAge": 7200,
+                    "domain": "localhost",
+                    "path": "/",
+                    "httpOnly": true,
+                    "hostOnly": true,
+                    "creation": "2024-01-29T18:47:59.118Z",
+                    "lastAccessed": "2024-01-29T18:51:18.221Z",
+                    "sameSite": "lax",
+                    "id": "693042946012485"
+                }
+            ],
+            "_type": "cookie_jar"
+        }
+    ]
+}
