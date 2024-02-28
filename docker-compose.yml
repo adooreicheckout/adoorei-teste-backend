@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+    db:
+        image: mysql:8
+        volumes:
+            - ./db_data:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "3306:3306"
+        cap_add:
+            - SYS_NICE
+        networks:
+            - mynetwork
+
+    laravel:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        ports:
+            - 8000:80
+        env_file:
+            - .env
+        volumes:
+            - ./:/app/
+        depends_on:
+            - db
+        networks:
+            - mynetwork
+
+networks:
+    mynetwork:
