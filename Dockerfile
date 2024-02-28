@@ -1,4 +1,4 @@
-FROM webdevops/php-nginx:8.0-alpine
+FROM webdevops/php-nginx:8.1-alpine
 WORKDIR /app
 
 # ======================================== SET VARIABLES PHP

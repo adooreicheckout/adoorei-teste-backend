@@ -34,14 +34,7 @@
 				"mikestead.dotenv",
 				"github.copilot"
 			]
-		},
-        "settings": {
-            "terminal.integrated.shell.linux": "/bin/bash"
-        },
-        "extensions": [
-            "felixfbecker.php-debug"
-        ],
-        "forwardPorts": [8000]
+		}
 	}
 
 
