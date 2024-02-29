@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class ProductsSeeder extends Seeder
@@ -16,6 +16,7 @@ class ProductsSeeder extends Seeder
         $data = json_decode(file_get_contents($filepath), true);
 
         foreach ($data as $line) {
+            Product::insert($line);
         }
     }
 }
