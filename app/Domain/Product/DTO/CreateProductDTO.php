@@ -4,7 +4,6 @@ namespace App\Domain\Product\DTO;
 
 use App\Domain\Product\Validators\ProductValidator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\ValidationException;
 
 class CreateProductDTO
 {
