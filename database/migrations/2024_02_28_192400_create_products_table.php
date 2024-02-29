@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedDecimal('price', $precision = 8, $scale = 2)->nullable(false);
+            $table->unsignedDecimal('price', $precision = 8, $scale = 3)->nullable(false);
             $table->string('description');
             $table->timestamps();
             $table->softDeletes();
