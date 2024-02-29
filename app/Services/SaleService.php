@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\SaleCancelRequest;
 use App\Http\Requests\SaleCreateRequest;
 use App\Http\Requests\SaleGetRequest;
 use App\Interfaces\Repositories\SaleProductRepositoryInterface;
@@ -53,7 +54,7 @@ class SaleService
         }
     }
 
-    public function getById(SaleGetRequest $request)
+    public function getById(SaleGetRequest $request): Sale
     {
         $sale = $this->saleRepositoryInterface->getById($request->sales_id);
 
@@ -65,5 +66,11 @@ class SaleService
         $list = $this->saleRepositoryInterface->getAll();
 
         return $list;
+    }
+    public function cancel(SaleCancelRequest $request): bool
+    {
+        $cancel = $this->saleRepositoryInterface->delete($request->sales_id);
+
+        return $cancel;
     }
 }
