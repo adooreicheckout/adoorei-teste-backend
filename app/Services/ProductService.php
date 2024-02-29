@@ -10,6 +10,7 @@ class ProductService
         private ProductRepositoryInterface $productRepositoryInterface
     ) {
     }
+
     public function list()
     {
         $list = $this->productRepositoryInterface->getAll();

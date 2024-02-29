@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\Repositories\BaseRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 abstract class AbstractEloquentRepository extends AbstractRepository implements BaseRepositoryInterface
 {
@@ -21,8 +22,8 @@ abstract class AbstractEloquentRepository extends AbstractRepository implements 
         return $this->createQuery()->find($id);
     }
 
-    public function getAll()
+    public function getAll(): Collection
     {
-        return $this->createQuery()->paginate();
+        return $this->createQuery()->get();
     }
 }

@@ -50,4 +50,11 @@ class SaleService
             throw $ve;
         }
     }
+
+    public function list()
+    {
+        $list = $this->saleRepositoryInterface->getAll();
+
+        return $list;
+    }
 }
