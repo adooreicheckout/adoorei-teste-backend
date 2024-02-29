@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('sale_id')->references('sales_id')->on('sales')->onDelete('cascade');
         });
     }
 
