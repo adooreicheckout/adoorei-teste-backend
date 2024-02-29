@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id('sales_id');
-            $table->unsignedDecimal('amount', $precision = 8, $scale = 2)->nullable(false);
+            $table->unsignedDecimal('amount', $precision = 8, $scale = 3)->nullable(false);
             $table->timestamps();
             $table->softDeletes();
         });
