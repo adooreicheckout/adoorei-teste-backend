@@ -12,4 +12,6 @@ interface SaleRepositoryInterface extends BaseRepositoryInterface
     public function getById(int $id): Sale;
 
     public function create(array $data): Sale;
+
+    public function delete(int $id): bool;
 }

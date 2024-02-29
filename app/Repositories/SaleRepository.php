@@ -21,4 +21,9 @@ class SaleRepository extends AbstractEloquentRepository implements SaleRepositor
     {
         return $this->createQuery()->find($id);
     }
+
+    public function delete(int $id): bool
+    {
+        return $this->createQuery()->find($id)->delete();
+    }
 }
