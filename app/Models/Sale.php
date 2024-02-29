@@ -39,6 +39,17 @@ class Sale extends Model
                 static::$saleProducts
             );
         });
+
+        static::updating(function (Sale $sale) {
+            $newAmount = $sale->calculateProductsTotalPrice(
+                $sale->products->toArray()
+            );
+
+            if ($sale->amount != $newAmount) {
+                $sale->amount = $newAmount;
+                $sale->save();
+            }
+        });
     }
 
     public function products(): HasMany
