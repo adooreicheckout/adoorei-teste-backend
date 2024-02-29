@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedDecimal('amount', $precision = 8, $scale = 2)->nullable(false);
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('sales_id')->references('sale_id')->on('sale_products')->onDelete('cascade');
         });
     }
 
