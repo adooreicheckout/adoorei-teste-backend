@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaleCreateRequest;
+use App\Http\Requests\SaleGetRequest;
 use App\Services\SaleService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -22,6 +23,23 @@ class SaleController extends Controller
             $created = $this->saleSevice->create($request);
 
             return Response()->json($created, Response::HTTP_CREATED);
+        } catch (ValidationException $ve) {
+            return response()->json([
+                'error' => $ve->errors()
+            ], Response::HTTP_NOT_ACCEPTABLE);
+        } catch (Exception $ve) {
+            return response()->json([
+                'error' => $ve->getMessage()
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function getById(SaleGetRequest $request): JsonResponse
+    {
+        try {
+            $list = $this->saleSevice->getById($request);
+
+            return Response()->json($list, Response::HTTP_ACCEPTED);
         } catch (ValidationException $ve) {
             return response()->json([
                 'error' => $ve->errors()

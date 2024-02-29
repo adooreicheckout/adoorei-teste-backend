@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Http\Requests\SaleCreateRequest;
+use App\Http\Requests\SaleGetRequest;
 use App\Interfaces\Repositories\SaleProductRepositoryInterface;
 use App\Interfaces\Repositories\SaleRepositoryInterface;
 use App\Models\Product;
 use App\Models\Sale;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class SaleService
@@ -18,7 +20,7 @@ class SaleService
     ) {
     }
 
-    public function create(SaleCreateRequest $request)
+    public function create(SaleCreateRequest $request): Sale
     {
         try {
             DB::beginTransaction();
@@ -51,7 +53,14 @@ class SaleService
         }
     }
 
-    public function list()
+    public function getById(SaleGetRequest $request)
+    {
+        $sale = $this->saleRepositoryInterface->getById($request->sales_id);
+
+        return $sale;
+    }
+
+    public function list(): Collection
     {
         $list = $this->saleRepositoryInterface->getAll();
 
