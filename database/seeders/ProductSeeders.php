@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Product;
+use App\Domain\Product\Entities\Product;
 
 class ProductSeeders extends Seeder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Domain\Product\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +17,11 @@ class Product extends Model
     protected $keyType = 'string';
     protected $fillable = [
         'product_id', 'name', 'price', 'description'
+    ];
+    protected $hidden = [
+        'updated_at',
+        'created_at',
+        'deleted_at'
     ];
 
     protected static function boot()
