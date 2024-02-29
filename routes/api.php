@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/product')->group(function () {
     Route::get('/', [ProductController::class, 'list']);
+});
+
+Route::prefix('/sale')->group(function () {
+    //Lembrar de tentar baixar o projeto ao criar o container no dockerfile
+    Route::post('/', [SaleController::class, 'create']);
 });
