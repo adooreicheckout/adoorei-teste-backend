@@ -21,5 +21,6 @@ Route::prefix('/product')->group(function () {
 
 Route::prefix('/sale')->group(function () {
     //Lembrar de tentar baixar o projeto ao criar o container no dockerfile
+    Route::get('/', [SaleController::class, 'list']);
     Route::post('/', [SaleController::class, 'create']);
 });
