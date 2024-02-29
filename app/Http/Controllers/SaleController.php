@@ -32,4 +32,17 @@ class SaleController extends Controller
             ], Response::HTTP_BAD_REQUEST);
         }
     }
+
+    public function list(): JsonResponse
+    {
+        try {
+            $list = $this->saleSevice->list();
+
+            return Response()->json($list, Response::HTTP_ACCEPTED);
+        } catch (Exception $ve) {
+            return response()->json([
+                'error' => $ve->getMessage()
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
 }
