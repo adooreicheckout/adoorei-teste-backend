@@ -16,4 +16,9 @@ class SaleProductRepository extends AbstractEloquentRepository implements SalePr
     {
         return $this->createQuery()->create($data);
     }
+
+    public function updateOrCreate(array $criteria, array $data): SaleProduct
+    {
+        return $this->createQuery()->updateOrCreate($criteria, $data);
+    }
 }

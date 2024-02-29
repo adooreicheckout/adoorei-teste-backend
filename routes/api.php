@@ -24,5 +24,6 @@ Route::prefix('/sale')->group(function () {
     Route::get('/', [SaleController::class, 'list']);
     Route::get('/get-by-id', [SaleController::class, 'getById']);
     Route::post('/', [SaleController::class, 'create']);
+    Route::patch('/', [SaleController::class, 'update']);
     Route::delete('/', [SaleController::class, 'cancel']);
 });

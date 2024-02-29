@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaleCancelRequest;
 use App\Http\Requests\SaleCreateRequest;
 use App\Http\Requests\SaleGetRequest;
+use App\Http\Requests\SaleUpdateRequest;
 use App\Services\SaleService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -75,6 +76,23 @@ class SaleController extends Controller
             $list = $this->saleSevice->list();
 
             return Response()->json($list, Response::HTTP_ACCEPTED);
+        } catch (Exception $ve) {
+            return response()->json([
+                'error' => $ve->getMessage()
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function update(SaleUpdateRequest $request): JsonResponse
+    {
+        try {
+            $updated = $this->saleSevice->update($request);
+
+            return Response()->json($updated, Response::HTTP_CREATED);
+        } catch (ValidationException $ve) {
+            return response()->json([
+                'error' => $ve->errors()
+            ], Response::HTTP_NOT_ACCEPTABLE);
         } catch (Exception $ve) {
             return response()->json([
                 'error' => $ve->getMessage()
