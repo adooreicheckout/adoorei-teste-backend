@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Celular 1",
+        "price": 1.800,
+        "description": "Lorenzo Ipsulum"
+    },
+    {
+        "name": "Celular 2",
+        "price": 3.200,
+        "description": "Lorem ipsum dolor"
+    },
+    {
+        "name": "Celular 3",
+        "price": 9.800,
+        "description": "Lorem ipsum dolor sit amet"
+    }
+]
