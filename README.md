@@ -3,7 +3,6 @@
 <a href="hhttps://www.adoorei.com.br/" target="_blank">
 <img src="https://adoorei.s3.us-east-2.amazonaws.com/images/loje_teste_logoadoorei_1662476663.png" width="160"></a>
 </p>
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://media.licdn.com/dms/image/D4D0BAQF4UjxjXJj6Qg/company-logo_200_200/0/1703105703892/hubii_co_logo?e=2147483647&v=beta&t=bV-icn8A01x2tTyb6vmy2nD1I4slyiAO8kokZbP4eS0" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
