@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "a9648861-1b35-423c-a5e2-83b5ab15809e",
+		"name": "Cellphones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar produtos disponíveis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/cellphones",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"cellphones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar nova venda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"products\":[\n        {\n            \"id\": 1,\n            \"quantity\": 1\n        },\n        {\n            \"id\": 2,\n            \"quantity\":2\n        },\n        {\n            \"id\": 4,\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/api/sales",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar uma venda específica",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/sales/1",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"sales",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar vendas realizadas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/sales",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancelar uma venda",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/sales/4",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"sales",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar novas produtos a uma venda",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"products\":[\n        {\n            \"id\": 1,\n            \"quantity\": 1\n        },\n        {\n            \"id\": 2,\n            \"quantity\":10\n        },\n        {\n            \"id\": 4,\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/api/sales/5",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"sales",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
