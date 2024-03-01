@@ -3,10 +3,20 @@
 <a href="hhttps://www.adoorei.com.br/" target="_blank">
 <img src="https://adoorei.s3.us-east-2.amazonaws.com/images/loje_teste_logoadoorei_1662476663.png" width="160"></a>
 </p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://media.licdn.com/dms/image/D4D0BAQF4UjxjXJj6Qg/company-logo_200_200/0/1703105703892/hubii_co_logo?e=2147483647&v=beta&t=bV-icn8A01x2tTyb6vmy2nD1I4slyiAO8kokZbP4eS0" width="400" alt="Laravel Logo"></a></p>
 
-## About Laravel
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Sobre o microserviço
+
+Este microserviço tem o objetivo de demonstrar minha habilidades na linguagem definida, os testes unitários inclusos tem fins apenas de demonstração das habilidade, não refletindo as reais necessidades, possibilidades de testes e tipos de validações:
+
+## Sobre o framework usado (Laravel)
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
@@ -16,48 +26,43 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Robust background job processing](https://laravel.com/docs/queues).
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Iniciando o microserviço
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+clonar o repositório
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- [ms-adoorei](https://github.com/lnascimento01/adoorei-teste-backend)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+O microserviço é executado via docker.
 
-## Laravel Sponsors
+- **[Via docker](https://www.docker.com)**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Via docker
 
-### Premium Partners
+Executar o comando a partir da pasta principal do projeto usando do terminal de preferência
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+docker-compose -f .\docker-compose.yml up -d --build
+```
 
-## Contributing
+Executar o seguinte comando para criar as tabelas e alimentar as mesmas
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+docker exec -it ms-adoorei php artisan migrate --seed 
+```
 
-## Code of Conduct
+## Testes unitários
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Executar o seguinte comando para a base de teste e as tabelas
 
-## Security Vulnerabilities
+```
+docker exec -it ms-adoorei php artisan migrate --env=testing  
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Documentação
 
-## License
+[Postman](https://www.postman.com/first-avengers/workspace/adoorei)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# License
+
+The project is software licensed under the [OGTSL license](https://opensource.org/license/opengroup-php/).
