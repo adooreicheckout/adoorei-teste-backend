@@ -3,114 +3,66 @@
 <a href="hhttps://www.adoorei.com.br/" target="_blank">
 <img src="https://adoorei.s3.us-east-2.amazonaws.com/images/loje_teste_logoadoorei_1662476663.png" width="160"></a>
 </p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://media.licdn.com/dms/image/D4D0BAQF4UjxjXJj6Qg/company-logo_200_200/0/1703105703892/hubii_co_logo?e=2147483647&v=beta&t=bV-icn8A01x2tTyb6vmy2nD1I4slyiAO8kokZbP4eS0" width="400" alt="Laravel Logo"></a></p>
 
-# Desafio desenvolvedor back-end
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-Seja muito bem-vindo(a), futuro desenvolvedor da Adoorei.
+## Sobre o microserviço
 
-Nós, recrutadores juntamente com a nossa equipe de ENGENHARIA, desenvolvemos um teste prático para conhecer um pouco mais sobre suas habilidade 
+Este microserviço tem o objetivo de demonstrar minha habilidades na linguagem definida, os testes unitários inclusos tem fins apenas de demonstração das habilidade, não refletindo as reais necessidades, possibilidades de testes e tipos de validações:
+
+## Sobre o framework usado (Laravel)
+
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 
+## Iniciando o microserviço
 
-## Objetivo
-Utilizando o  <a href=“https://laravel.com/docs/10.x“>Laravel</a> cria uma API rest, que resolva o seguinte cenário:
+clonar o repositório
 
+- [ms-adoorei](https://github.com/lnascimento01/adoorei-teste-backend)
 
-A Loja ABC LTDA, vende produtos de diferentes nichos. No momento precisamos registrar a venda de celulares.
+O microserviço é executado via docker.
 
-Não vamos nos preocupar com o cadastro de produtos, porém precisamos ter uma tabela em nosso banco contendo os aparelhos celulares que vão ser vendidos, por exemplo:
+- **[Via docker](https://www.docker.com)**
 
-```json
-[
-    {
-        "name": "Celular 1",
-        "price": 1.800,
-        "description": "Lorenzo Ipsulum"
-    },
-    {
-        "name": "Celular 2",
-        "price": 3.200,
-        "description": "Lorem ipsum dolor"
-    },
-    {
-        "name": "Celular 3",
-        "price": 9.800,
-        "description": "Lorem ipsum dolor sit amet"
-    }
-]
+# Via docker
+
+Executar o comando a partir da pasta principal do projeto usando do terminal de preferência
+
+```
+docker-compose -f .\docker-compose.yml up -d --build
 ```
 
-Uma vez que temos os produtos em nosso banco, vamos seguir com o registro de venda desses aparelhos.
+Executar o seguinte comando para criar as tabelas e alimentar as mesmas
 
-Não vamos nós preucupar com informações do comprador, dados de pagamento, entrega, possibilidade de descontos.
-
-Temos que registrar somente a venda. 
-
-Então nossa consulta vai retornar algo como:
-```json
-{
-  "sales_id": "202301011",
-  "amount": 8200,
-  "products": [
-    {
-      "product_id": 1,
-      "nome": "Celular 1",
-      "price": 1.800,
-      "amount": 1
-    },
-    {
-      "product_id": 2,
-      "nome": "Celular 2",
-      "price": 3.200,
-      "amount": 2
-    },
-  ]
-}
+```
+docker exec -it ms-adoorei php artisan migrate --seed 
 ```
 
-Nossa API vai ter endpoints que possibilitam
+## Testes unitários
 
-* Listar produtos disponíveis
-* Cadastrar nova venda
-* Consultar vendas realizadas
-* Consultar uma venda específica
-* Cancelar uma venda
-* Cadastrar novas produtos a uma venda
+Executar o seguinte comando para a base de teste e as tabelas
 
+```
+docker exec -it ms-adoorei php artisan migrate --env=testing  
+```
 
+# Documentação
 
+[Postman](https://www.postman.com/first-avengers/workspace/adoorei)
 
-## Nossa análise
+# License
 
-Todo o seu desenvolvimento será levado em consideração. Busque alcançar o seu melhor, utilizando os recursos com os quais você se sente mais confortável.
-
-### É essencial no seu código:
-* Utilizar comandos de Migrate/Seed para a criação e atualização do seu banco de dados.
-* Este projeto é destinado a uma API Rest; portanto, respeite o formato de comunicação de entrada e saída de dados.
-* Faça commits regulares no seu código.
-
-### Pontos que irão destacar você neste desafio:
-* Utilizar Docker para a execução do seu projeto.
-* Implementar testes unitários.
-* Criar documentação para seus endpoints (utilizando ferramentas como Postman ou Insomnia).
-* Aplicar conceitos de Clean Architecture, S.O.L.I.D., Test-Driven Development (TDD), Domain-driven design (DDD), Command Query Responsibility Segregation (CQRS), Objects Calisthenics, You Ain’t Gonna Need It (YAGNI), Conventional Commits, e KISS.
-
-## Nossa análise
-
-Todo o seu desenvolvimento será levado em consideração. Busque alcançar o seu melhor, utilizando os recursos com os quais você se sente mais confortável.
-
-### É essencial no seu código:
-* Utilizar comandos de Migrate/Seed para a criação e atualização do seu banco de dados.
-* Este projeto é destinado a uma API Rest; portanto, respeite o formato de comunicação de entrada e saída de dados.
-* Faça commits regulares no seu código.
-
-### Pontos que irão destacar você neste desafio:
-* Utilizar Docker para a execução do seu projeto.
-* Implementar testes unitários.
-* Criar documentação para seus endpoints (utilizando ferramentas como Postman ou Insomnia).
-* Aplicar conceitos de Clean Architecture, S.O.L.I.D., Test-Driven Development (TDD), Domain-driven design (DDD), Command Query Responsibility Segregation (CQRS), Objects Calisthenics, You Ain’t Gonna Need It (YAGNI), Conventional Commits, e KISS.
-
-
-## Boa sorte!
-
-É isso!. Ficamos muito felizes com a sua aplicação para esse Teste. Estamos à sua disposição para tirar qualquer dúvida. Boa sorte! 😉
+The project is software licensed under the [OGTSL license](https://opensource.org/license/opengroup-php/).
