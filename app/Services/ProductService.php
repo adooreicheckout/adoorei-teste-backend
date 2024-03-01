@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\Repositories\ProductRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class ProductService
 {
@@ -11,7 +12,7 @@ class ProductService
     ) {
     }
 
-    public function list()
+    public function list(): Collection
     {
         $list = $this->productRepositoryInterface->getAll();
 
