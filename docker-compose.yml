@@ -1,0 +1,70 @@
+version: "3"
+
+networks:
+  adoorei-network:
+    driver: bridge
+
+volumes:
+    mysql_data:
+        driver: local
+
+services:
+  database:
+    hostname: mysql
+    image: mysql:5.7.22
+    container_name: adoorei-database
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+
+    volumes:
+      - mysql_data:/var/db/mysql
+    ports:
+      - ${DB_PORT}:3306
+    healthcheck:
+        test: ["CMD-SHELL", "mysqladmin -u $$MYSQL_USER -p$$MYSQL_PASSWORD ping -h localhost || exit 1"]
+        timeout: 5s
+        retries: 10
+    networks:
+      adoorei-network:
+        aliases:
+          - adoorei-database
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: adoorei-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: ${DB_PORT}
+    ports:
+      - 8001:80
+    networks:
+      adoorei-network:
+        aliases:
+          - adoorei-phpmyadmin
+
+  # Generate backend server
+  backend:
+    build: .
+    restart: always
+    container_name: adoorei-backend
+    environment:
+      DB_CONNECTION: ${DB_CONNECTION}
+      DB_HOST: mysql
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/var/www
+      -  /var/www/vendor
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - adoorei-network
+
