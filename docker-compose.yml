@@ -5,12 +5,12 @@ networks:
     driver: bridge
 
 volumes:
-    mysql_data:
+    database_data:
         driver: local
 
 services:
   database:
-    hostname: mysql
+    hostname: ${DB_HOST}
     image: mysql:5.7.22
     container_name: adoorei-database
     environment:
@@ -18,9 +18,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
-
     volumes:
-      - mysql_data:/var/db/mysql
+      - database_data:/var/db
     ports:
       - ${DB_PORT}:3306
     healthcheck:
@@ -36,7 +35,7 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: adoorei-phpmyadmin
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: ${DB_HOST}
       PMA_PORT: ${DB_PORT}
     ports:
       - 8001:80
@@ -52,7 +51,7 @@ services:
     container_name: adoorei-backend
     environment:
       DB_CONNECTION: ${DB_CONNECTION}
-      DB_HOST: mysql
+      DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
       DB_DATABASE: ${DB_DATABASE}
       DB_USERNAME: ${DB_USERNAME}
