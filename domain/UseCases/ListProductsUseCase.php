@@ -2,8 +2,8 @@
 
 namespace Domain\UseCases;
 
-use App\Database\Repositories\ProductsRepository;
 use App\Http\Resources\ProductsResource;
+use Domain\Repositories\ProductsRepository;
 
 class ListProductsUseCase
 {

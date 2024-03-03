@@ -2,13 +2,14 @@
 
 namespace Tests\Unit;
 
-use App\Database\Repositories\ProductsRepository;
+use App\Database\Repositories\Eloquent\EloquentProductsRepository;
 use App\Models\Product;
 use Domain\UseCases\ListProductsUseCase;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ListProductsUseCaseTest extends TestCase
 {
@@ -34,7 +35,7 @@ class ListProductsUseCaseTest extends TestCase
         ]);
 
 
-        $productsRepository = new ProductsRepository();
+        $productsRepository = new EloquentProductsRepository();
         $listProductsUseCase = new ListProductsUseCase($productsRepository);
         $productsListed = $listProductsUseCase->execute();
 
@@ -43,7 +44,7 @@ class ListProductsUseCaseTest extends TestCase
 
     public function test_list_with_no_products(): void
     {
-        $productsRepository = new ProductsRepository();
+        $productsRepository = new EloquentProductsRepository();
         $listProductsUseCase = new ListProductsUseCase($productsRepository);
         $productsListed = $listProductsUseCase->execute();
 
