@@ -23,7 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/products', [ProductsController::class, 'index']);
 
 Route::get('/sales', [SalesController::class, 'index']);
-Route::get('/sales/{id}', [SalesController::class, 'index']);
+Route::get('/sales/{id}', [SalesController::class, 'show']);
+Route::get('/sales/status/completed', [SalesController::class, 'index']);
 Route::post('/sales', [SalesController::class, 'store']);
 Route::patch('/sales/cancel', [SalesController::class, 'cancel']);
 Route::post('/sales/add-product', [SalesController::class, 'addProduct']);

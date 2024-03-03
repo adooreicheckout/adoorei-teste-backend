@@ -47,4 +47,11 @@ class EloquentSalesRepository implements SalesRepository
 
         return $saleUpdated;
     }
+
+    public function findByIdWithProducts($saleId)
+    {
+        $sale = Sale::with('products')->findOrFail($saleId);
+
+        return $sale;
+    }
 }

@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\Eloquent\EloquentProductsRepository;
 use App\Database\Repositories\Eloquent\EloquentSalesRepository;
 use App\Http\Requests\StoreSaleRequest;
+use App\Http\Resources\SaleWithProductsResource;
 use App\Http\Resources\SimpleSaleResource;
 use Domain\UseCases\CreateSaleUseCase;
+use Domain\UseCases\ShowSaleUseCase;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SalesController extends Controller
 {
@@ -40,7 +43,7 @@ class SalesController extends Controller
             $saleCreated = $createSale->execute($request->all());
 
             $saleCreatedResource = new SimpleSaleResource($saleCreated);
-            
+
             DB::commit();
             return response()->json($saleCreatedResource, Response::HTTP_CREATED);
         } catch (Exception $e) {
@@ -55,15 +58,22 @@ class SalesController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        try {
+            $salesRepository = new EloquentSalesRepository();
+            $createSale = new ShowSaleUseCase($salesRepository);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+            $saleCreated = $createSale->execute($id);
+
+            $saleCreatedResource = new SaleWithProductsResource($saleCreated);
+
+            return response()->json($saleCreatedResource);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Resource not found'
+            ], Response::HTTP_NOT_FOUND);
+        } catch (Exception $e) {
+            return $this->handleUnexpectedError();
+        }
     }
 
     /**
