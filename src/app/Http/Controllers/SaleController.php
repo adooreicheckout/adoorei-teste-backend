@@ -111,8 +111,25 @@ class SaleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sale $sale)
+    public function destroy(ShowRequest $request)
     {
-        //
+        try {
+            $id = $request->validated()['id'];
+            if ($this->saleService->destroy($id)) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Venda excluída com sucesso!'
+                ]);
+            }
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Erro ao excluir a venda!'
+            ], 500);
+        }catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Erro ao excluir a venda! - Exception: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }

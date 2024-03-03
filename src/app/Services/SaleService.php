@@ -69,7 +69,8 @@ class SaleService implements SaleContract
 
     public function destroy(int $id): bool
     {
-        // TODO: Implement destroy() method.
+        $sales = $this->getById($id);
+        return $this->saleRepository->destroy($sales);
     }
 
     public function getById(int $id): Model|null

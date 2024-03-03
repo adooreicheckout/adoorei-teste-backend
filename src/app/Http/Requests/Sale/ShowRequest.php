@@ -22,7 +22,7 @@ class ShowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer',
+            'id' => 'required|integer|exists:sales,sales_id',
         ];
     }
 
@@ -44,7 +44,8 @@ class ShowRequest extends FormRequest
     {
         return [
             'id.required' => 'Informe o id da venda.',
-            'id.integer' => 'Informe um número inteiro para o id da venda.'
+            'id.integer' => 'Informe um número inteiro para o id da venda.',
+            'id.exists' => 'A venda informada não existe na base de dados.'
         ];
     }
 }

@@ -72,7 +72,10 @@ class SaleRepository implements SaleContract
 
     public function destroy(Model $model): bool
     {
-        // TODO: Implement destroy() method.
+        unset($model->products);
+        $model->status = SaleStatus::cancelled()->value;
+        $model->deleted_at = now();
+        return $model->save();
     }
 
     public function getById(int $id): Model|null
