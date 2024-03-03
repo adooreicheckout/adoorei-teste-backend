@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Sale\IndexRequest;
+use App\Http\Requests\Sale\ShowRequest;
 use App\Models\Sale;
 use App\Services\SaleService;
 use Illuminate\Http\Request;
@@ -18,10 +20,11 @@ class SaleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
         try {
-            $sales = $this->saleService->list();
+            $filter = $request->validated();
+            $sales = $this->saleService->list($filter);
             return response()->json($sales);
         }catch (\Exception $e) {
             return response()->json([
@@ -68,9 +71,25 @@ class SaleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Sale $sale)
+    public function show(ShowRequest $request)
     {
-        //
+        try {
+
+            $id = $request->validated()['id'];
+            $sale = $this->saleService->getById($id);
+            if ($sale) {
+                return response()->json($sale);
+            }
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Venda não encontrada!'
+            ], 404);
+        }catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Erro ao buscar a venda! - Exception: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

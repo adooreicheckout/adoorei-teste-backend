@@ -21,21 +21,6 @@ class ProductService implements ProductServiceContract
         return $this->productRepository->list($filters);
     }
 
-    public function create(array $data): bool
-    {
-        // TODO: Implement create() method.
-    }
-
-    public function update(Model $model): bool
-    {
-        // TODO: Implement update() method.
-    }
-
-    public function destroy($id): bool
-    {
-        // TODO: Implement destroy() method.
-    }
-
     public function getById(int $id): Model|null
     {
         return $this->productRepository->getById($id);

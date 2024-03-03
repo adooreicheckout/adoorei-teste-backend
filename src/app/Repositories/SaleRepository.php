@@ -29,7 +29,7 @@ class SaleRepository implements SaleContract
             }]);
         }])->select('sales_id', 'amount');
         if (isset($filters['id'])) {
-            return $query->where('sales_id', $filters['id'])->first();
+            return $query->where('sales.sales_id', $filters['id'])->first();
         }
         if (isset($filters['perpage'])) {
             return $query->simplePaginate($filters['perpage']);
@@ -73,5 +73,10 @@ class SaleRepository implements SaleContract
     public function destroy(Model $model): bool
     {
         // TODO: Implement destroy() method.
+    }
+
+    public function getById(int $id): Model|null
+    {
+        return $this->list(['id' => $id]);
     }
 }

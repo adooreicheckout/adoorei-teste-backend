@@ -26,6 +26,18 @@ class SaleService implements SaleContract
     {
         $products = [];
         $result = $this->saleRepository->list($filters);
+
+        if ($result instanceof Model) {
+            foreach ($result->salesProducts as $r) {
+                $r->products->amount = $r->amount;
+                $products[] = $r->products;
+                unset($r->products);
+            }
+            unset($result->salesProducts);
+            $result->products = $products;
+            return $result;
+        }
+
         foreach ($result as $row) {
             $products = [];
             foreach ($row->salesProducts as $r) {
@@ -62,6 +74,6 @@ class SaleService implements SaleContract
 
     public function getById(int $id): Model|null
     {
-        // TODO: Implement getById() method.
+        return $this->list(['id' => $id]);
     }
 }
