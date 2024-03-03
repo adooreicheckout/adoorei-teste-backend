@@ -54,4 +54,11 @@ class EloquentSalesRepository implements SalesRepository
 
         return $sale;
     }
+
+    public function findByStatus($status)
+    {
+        $sales = Sale::where('status', $status)->get();
+
+        return $sales;
+    }
 }

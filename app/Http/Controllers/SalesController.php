@@ -8,6 +8,7 @@ use App\Http\Requests\StoreSaleRequest;
 use App\Http\Resources\SaleWithProductsResource;
 use App\Http\Resources\SimpleSaleResource;
 use Domain\UseCases\CreateSaleUseCase;
+use Domain\UseCases\ShowCompletedSalesUseCase;
 use Domain\UseCases\ShowSaleUseCase;
 use Exception;
 use Illuminate\Http\Request;
@@ -60,9 +61,9 @@ class SalesController extends Controller
     {
         try {
             $salesRepository = new EloquentSalesRepository();
-            $createSale = new ShowSaleUseCase($salesRepository);
+            $showSaleUseCase = new ShowSaleUseCase($salesRepository);
 
-            $saleCreated = $createSale->execute($id);
+            $saleCreated = $showSaleUseCase->execute($id);
 
             $saleCreatedResource = new SaleWithProductsResource($saleCreated);
 
@@ -71,6 +72,21 @@ class SalesController extends Controller
             return response()->json([
                 'message' => 'Resource not found'
             ], Response::HTTP_NOT_FOUND);
+        } catch (Exception $e) {
+            return $this->handleUnexpectedError();
+        }
+    }
+
+    public function showCompletedSales() {
+        try {
+            $salesRepository = new EloquentSalesRepository();
+            $showCompletedSalesUseCase = new ShowCompletedSalesUseCase($salesRepository);
+
+            $sales = $showCompletedSalesUseCase->execute();
+
+            $salesResource = SimpleSaleResource::collection($sales);
+
+            return response()->json($salesResource);
         } catch (Exception $e) {
             return $this->handleUnexpectedError();
         }
