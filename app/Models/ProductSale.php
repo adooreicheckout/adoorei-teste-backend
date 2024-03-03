@@ -9,6 +9,8 @@ class ProductSale extends Model
 {
     use HasFactory;
 
+    public $table = 'products_by_sale';
+
     /**
      * The attributes that are mass assignable.
      *
