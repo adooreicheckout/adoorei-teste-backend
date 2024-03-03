@@ -15,7 +15,7 @@ class ProductSale extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'amount',
         'price',
         'product_id',
         'sale_id',
@@ -27,6 +27,7 @@ class ProductSale extends Model
      * @var array
      */
     protected $casts = [
-        'price' => 'price',
+        'price' => 'float',
+        'amount' => 'integer',
     ];
 }

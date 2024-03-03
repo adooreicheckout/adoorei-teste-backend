@@ -25,6 +25,6 @@ class Sale extends Model
      * @var array
      */
     protected $casts = [
-        'price' => 'amount',
+        'amount' => 'float',
     ];
 }
