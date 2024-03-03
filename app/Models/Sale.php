@@ -27,4 +27,13 @@ class Sale extends Model
     protected $casts = [
         'amount' => 'float',
     ];
+
+    const STATUS_PENDING = 'pending';
+    const STATUS_COMPLETED = 'completed';
+    const STATUS_CANCELLED = 'cancelled';
+
+    public function products()
+    {
+        return $this->hasMany(ProductSale::class);
+    }
 }
