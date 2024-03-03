@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Sale\IndexRequest;
 use App\Http\Requests\Sale\ShowRequest;
+use App\Http\Requests\Sale\UpdateRequest;
 use App\Models\Sale;
 use App\Services\SaleService;
 use Illuminate\Http\Request;
@@ -93,19 +94,28 @@ class SaleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Sale $sale)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sale $sale)
+    public function update(UpdateRequest $request)
     {
-        //
+        try {
+            $data = $request->validated();
+            if ($this->saleService->update($data)) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Venda atualizada com sucesso!'
+                ]);
+            }
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Erro ao atualizar a venda!'
+            ], 500);
+        }catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Erro ao atualizar a venda! - Exception: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

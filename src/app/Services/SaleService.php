@@ -66,9 +66,15 @@ class SaleService implements SaleContract
         return $this->saleRepository->store($data);
     }
 
-    public function update(Model $model): bool
+    public function update(array $data): bool
     {
-        // TODO: Implement update() method.
+        $total = 0;
+        foreach ($data['products'] as $row) {
+            $product = $this->productRepository->getById($row['product_id']);
+            $total += $product->price * floatval($row['amount']);
+        }
+        $data['total'] = floatval($total);
+        return $this->saleRepository->update($data);
     }
 
     public function destroy(int $id): bool

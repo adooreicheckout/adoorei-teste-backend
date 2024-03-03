@@ -17,17 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'products'], function () {
-    Route::get('/', [ProductController::class, 'index']);
-    Route::get('/{id}', [ProductController::class, 'show']);
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/{id}', [ProductController::class, 'show'])->name('products.show');
 });
 
 Route::group(['prefix' => 'sales'], function () {
-    Route::get('/', [SaleController::class, 'index']);
-    Route::get('/{id}', [SaleController::class, 'show']);
-    Route::post('/', [SaleController::class, 'store']);
-    Route::put('/{id}', [SaleController::class, 'update']);
-    Route::delete('/{id}', [SaleController::class, 'destroy']);
+    Route::get('/', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('/{id}', [SaleController::class, 'show'])->name('sales.show');
+    Route::post('/', [SaleController::class, 'store'])->name('sales.store');
+    Route::post('/{id}', [SaleController::class, 'update'])->name('sales.update');
+    Route::delete('/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
 });
-
-
-

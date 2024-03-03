@@ -65,9 +65,33 @@ class SaleRepository implements SaleContract
 
     }
 
-    public function update(Model $model): bool
+    public function update(array $data): bool
     {
-        // TODO: Implement storeOrUpdate() method.
+        try {
+            DB::beginTransaction();
+
+            $sale = Sale::query()->find($data['id']);
+
+            $sale->amount = $data['total'];
+            $sale->status = SaleStatus::completed()->value;
+            $sale->save();
+
+            foreach ($data['products'] as $product) {
+                $saleProduct = SaleProduct::query()
+                    ->where('sales_id', $sale->sales_id)
+                    ->where('product_id', $product['product_id'])->first();
+                $saleProduct->fill($product);
+                $saleProduct->save();
+            }
+
+            DB::commit();
+            return true;
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            report($e);
+            return false;
+        }
     }
 
     public function destroy(Model $model): bool
