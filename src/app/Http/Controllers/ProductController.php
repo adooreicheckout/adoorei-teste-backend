@@ -21,37 +21,23 @@ class ProductController extends Controller
     {
         try {
             $result = $this->productService->list($request->validated());
-            if ($result) {
-                return response()->json($result, 200);
+
+            if ($result->isEmpty()) {
+                return response()->json(['error' => 'No products found'], 404);
             }
-           return response()->json(['error' => 'No products found'], 404);
+            return response()->json($result);
         } catch (\Exception $e) {
             report($e);
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(Request $request)
     {
-        //
+        return response()->json($this->productService->getById($request->id));
     }
 
     /**

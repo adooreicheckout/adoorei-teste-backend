@@ -24,6 +24,7 @@ services:
         depends_on:
             - mysql
             - redis
+        #command: ["sh", "-c", "php artisan migrate:fresh --seed"]
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:

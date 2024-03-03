@@ -22,10 +22,8 @@ class Sale extends Model
         'status' => SaleStatus::class,
     ];
 
-    public function products()
+    public function salesProducts()
     {
-        return $this->hasMany(Product::class, 'sale_products', 'sales_id', 'product_id')
-            ->withPivot('amount')
-            ->withTimestamps();
+        return $this->hasMany(SaleProduct::class, 'sales_id', 'sales_id');
     }
 }

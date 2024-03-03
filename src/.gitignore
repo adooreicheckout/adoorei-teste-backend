@@ -33,3 +33,4 @@ docker-compose.override.yml
 coverage/
 storage/framework/*
 !storage/framework/.gitignore
+composer.lock

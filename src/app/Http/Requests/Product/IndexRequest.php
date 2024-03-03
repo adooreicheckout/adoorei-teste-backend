@@ -26,6 +26,20 @@ class IndexRequest extends FormRequest
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'perpage' => !empty(preg_replace('/[^0-9]/', '', $this->perpage)) ? preg_replace('/[^0-9]/', '', $this->perpage)  : null
+        ]);
+    }
+
+    public function attribute()
+    {
+        return [
+            'perpage' => 'por página'
+        ];
+    }
+
     public function messages(): array
     {
         return [

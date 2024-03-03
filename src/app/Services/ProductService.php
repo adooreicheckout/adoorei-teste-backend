@@ -5,9 +5,8 @@ namespace App\Services;
 use App\Contracts\Services\Product as ProductServiceContract;
 use App\Repositories\ProductRepository;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use PhpOption\None;
+use \Illuminate\Contracts\Pagination\Paginator;
 
 class ProductService implements ProductServiceContract
 {
@@ -27,7 +26,7 @@ class ProductService implements ProductServiceContract
         // TODO: Implement create() method.
     }
 
-    public function update(array $data): bool
+    public function update(Model $model): bool
     {
         // TODO: Implement update() method.
     }
@@ -36,4 +35,10 @@ class ProductService implements ProductServiceContract
     {
         // TODO: Implement destroy() method.
     }
+
+    public function getById(int $id): Model|null
+    {
+        return $this->productRepository->getById($id);
+    }
+
 }

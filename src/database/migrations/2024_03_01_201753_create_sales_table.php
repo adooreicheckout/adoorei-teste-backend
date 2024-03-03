@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedDecimal('amount', $precision = 8, $scale = 3)->nullable(false);
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

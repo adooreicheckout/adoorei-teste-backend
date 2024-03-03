@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products', 'product_id');
             $table->bigInteger('amount');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
