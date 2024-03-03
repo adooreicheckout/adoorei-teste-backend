@@ -2,7 +2,6 @@
 
 namespace Domain\UseCases;
 
-use App\Http\Resources\ProductsResource;
 use Domain\Repositories\ProductsRepository;
 
 class ListProductsUseCase
@@ -13,6 +12,6 @@ class ListProductsUseCase
     {
         $products = $this->productsRepository->findAll();
 
-        return ProductsResource::collection($products);
+        return $products;
     }
 }

@@ -19,11 +19,12 @@ class ProductsController extends Controller
         try {
             $productsRepository = new EloquentProductsRepository();
             $listProductsUseCase = new ListProductsUseCase($productsRepository);
-            $productsListed = $listProductsUseCase->execute();
 
-            return response()->json($productsListed);
+            $productsListed = $listProductsUseCase->execute();
+            $produtsApiCollection = ProductsResource::collection($productsListed);
+
+            return response()->json($produtsApiCollection);
         } catch (Exception $e) {
-            dd($e);
             return $this->handleUnexpectedError();
         }
     }
