@@ -14,4 +14,11 @@ class EloquentProductsRepository implements ProductsRepositoryInterface
 
         return $products;
     }
+
+    public function findById($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return $product;
+    }
 }
