@@ -27,6 +27,10 @@ class SaleService implements SaleContract
         $products = [];
         $result = $this->saleRepository->list($filters);
 
+        if (empty($result)) {
+            return null;
+        }
+
         if ($result instanceof Model) {
             foreach ($result->salesProducts as $r) {
                 $r->products->amount = $r->amount;
@@ -70,6 +74,9 @@ class SaleService implements SaleContract
     public function destroy(int $id): bool
     {
         $sales = $this->getById($id);
+        if (empty($sales)) {
+            return false;
+        }
         return $this->saleRepository->destroy($sales);
     }
 

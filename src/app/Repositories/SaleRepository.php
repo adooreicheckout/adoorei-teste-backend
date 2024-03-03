@@ -75,7 +75,8 @@ class SaleRepository implements SaleContract
         unset($model->products);
         $model->status = SaleStatus::cancelled()->value;
         $model->deleted_at = now();
-        return $model->save();
+        $model->save();
+        return true;
     }
 
     public function getById(int $id): Model|null

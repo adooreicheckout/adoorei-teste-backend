@@ -77,7 +77,7 @@ class SaleController extends Controller
 
             $id = $request->validated()['id'];
             $sale = $this->saleService->getById($id);
-            if ($sale) {
+            if (!empty($sale)) {
                 return response()->json($sale);
             }
             return response()->json([
@@ -123,7 +123,7 @@ class SaleController extends Controller
             }
             return response()->json([
                 'status' => 'error',
-                'message' => 'Erro ao excluir a venda!'
+                'message' => 'Venda já excluída!'
             ], 500);
         }catch (\Exception $e) {
             return response()->json([
