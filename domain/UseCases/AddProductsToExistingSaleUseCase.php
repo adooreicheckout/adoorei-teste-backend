@@ -20,7 +20,7 @@ class AddProductsToExistingSaleUseCase
         $sale = $this->salesRepository->findByIdWithProducts($id);
 
         if ($sale->status === Sale::STATUS_CANCELED) {
-            throw new SaleAlreadyCanceledException("Sale already cancelled! You can't add new products to a cancelled sale.");
+            throw new SaleAlreadyCanceledException("Sale already canceled! You can't add new products to a canceled sale.");
         }
 
         $totalAmoundOfTheSale = $sale->amount;
