@@ -1,0 +1,170 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2024-03-04T16:09:14.732Z",
+    "__export_source": "insomnia.desktop.app:v2021.5.0",
+    "resources": [
+        {
+            "_id": "wrk_scratchpad",
+            "parentId": "proj_scratchpad",
+            "modified": 1705442066503,
+            "created": 1705442066503,
+            "name": "Scratch Pad",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_2adab2892e78497ea776fccf1cd55657",
+            "parentId": "fld_c54bda8b4ffb4ff68c27110da03a2934",
+            "modified": 1709522910640,
+            "created": 1709494846824,
+            "url": "localhost:8080/api/v1/products",
+            "name": "List Products",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1709494885812,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_0b6a6d6af87f436aaa9208c44af03df3",
+            "parentId": "fld_4f351d53ca3e4c23bcfc8b8b800b25ff",
+            "modified": 1709522945725,
+            "created": 1709510188017,
+            "url": "localhost:8080/api/v1/sales",
+            "name": "Create Sale",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"products\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"quantity\": 10\n\t\t},\n\t\t\t{\n\t\t\t\"product_id\": 3,\n\t\t\t\"quantity\": 2\n\t\t}\n\t]\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1709522945689,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_62a6fa2c281f4f79abceae016d96479a",
+            "parentId": "fld_4f351d53ca3e4c23bcfc8b8b800b25ff",
+            "modified": 1709522972813,
+            "created": 1709522954156,
+            "url": "localhost:8080/api/v1/sales",
+            "name": "List Sale",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1709522954156,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_f3b157d7575a45f19355e403ac84c75c",
+            "parentId": "wrk_scratchpad",
+            "modified": 1709494843787,
+            "created": 1709494843787,
+            "name": "Sales API",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1709494843787,
+            "_type": "request_group"
+        },
+        {
+            "_id": "fld_c54bda8b4ffb4ff68c27110da03a2934",
+            "parentId": "fld_f3b157d7575a45f19355e403ac84c75c",
+            "modified": 1709494870887,
+            "created": 1709494870887,
+            "name": "Product",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1709494870887,
+            "_type": "request_group"
+        },
+        {
+            "_id": "fld_4f351d53ca3e4c23bcfc8b8b800b25ff",
+            "parentId": "fld_f3b157d7575a45f19355e403ac84c75c",
+            "modified": 1709522936146,
+            "created": 1709522933805,
+            "name": "Sale",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1709522933805,
+            "_type": "request_group"
+        },
+        {
+            "_id": "env_99d30891da4bdcebc63947a8fc17f076de878684",
+            "parentId": "wrk_scratchpad",
+            "modified": 1705442085143,
+            "created": 1705442085143,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1705442085143,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_99d30891da4bdcebc63947a8fc17f076de878684",
+            "parentId": "wrk_scratchpad",
+            "modified": 1708574753121,
+            "created": 1705442085243,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        }
+    ]
+}
