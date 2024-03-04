@@ -54,7 +54,7 @@ class SaleController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Venda cadastrada com sucesso!'
-                ]);
+                ], 201);
             }
             return response()->json([
                 'status' => 'error',
@@ -128,12 +128,12 @@ class SaleController extends Controller
             if ($this->saleService->destroy($id)) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Venda excluída com sucesso!'
+                    'message' => 'Venda cancelada com sucesso!'
                 ]);
             }
             return response()->json([
                 'status' => 'error',
-                'message' => 'Venda já excluída!'
+                'message' => 'Venda já cancelada!'
             ], 500);
         }catch (\Exception $e) {
             return response()->json([

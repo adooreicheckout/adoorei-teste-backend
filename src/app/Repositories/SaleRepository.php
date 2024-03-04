@@ -27,7 +27,7 @@ class SaleRepository implements SaleContract
             $query->with(['products' => function ($query) {
                 $query->select('product_id', 'name', 'price');
             }]);
-        }])->select('sales_id', 'amount');
+        }])->select('sales_id', 'amount', 'status');
         if (isset($filters['id'])) {
             return $query->where('sales.sales_id', $filters['id'])->first();
         }
@@ -98,7 +98,6 @@ class SaleRepository implements SaleContract
     {
         unset($model->products);
         $model->status = SaleStatus::cancelled()->value;
-        $model->deleted_at = now();
         $model->save();
         return true;
     }
