@@ -15,11 +15,11 @@ class CancelSaleFeatureTest extends TestCase
     /**
      * A basic unit test example.
      */
-    public function test_cancel_completed_sale_feature(): void
+    public function test_cancel_complete_sale_feature(): void
     {
         $sale = Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
         $response = $this->patch('/api/sales/'.$sale->id.'/cancel');

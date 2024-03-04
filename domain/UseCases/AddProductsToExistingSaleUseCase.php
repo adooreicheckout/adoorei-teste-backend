@@ -38,7 +38,7 @@ class AddProductsToExistingSaleUseCase
 
         $sale = $this->salesRepository->update([
             'amount' => $totalAmoundOfTheSale,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ], $sale);
 
         return $sale;

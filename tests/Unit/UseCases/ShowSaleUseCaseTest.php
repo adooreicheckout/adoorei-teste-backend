@@ -34,7 +34,7 @@ class ShowSaleUseCaseTest extends TestCase
 
         $sale = Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
         ProductSale::create([

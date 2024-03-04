@@ -8,7 +8,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 
-class ShowCompletedSalesFeatureTest extends TestCase
+class ListCompleteSalesFeatureTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,7 +19,7 @@ class ShowCompletedSalesFeatureTest extends TestCase
     {
         Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
         Sale::create([
@@ -29,15 +29,15 @@ class ShowCompletedSalesFeatureTest extends TestCase
 
         Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
-        $response = $this->get('/api/sales/status/completed');
+        $response = $this->get('/api/sales/status/complete');
         $response->assertStatus(Response::HTTP_OK);
 
-        $completedSalesResponse = json_decode($response->getContent());
+        $completeSalesResponse = json_decode($response->getContent());
 
-        $this->assertEquals(2, count($completedSalesResponse));
+        $this->assertEquals(2, count($completeSalesResponse));
     }
 
     public function test_show_sale_that_dont_exists_feature(): void

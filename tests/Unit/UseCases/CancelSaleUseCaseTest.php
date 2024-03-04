@@ -16,11 +16,11 @@ class CancelSaleUseCaseTest extends TestCase
     /**
      * A basic unit test example.
      */
-    public function test_cancel_completed_sale_use_case(): void
+    public function test_cancel_complete_sale_use_case(): void
     {
         $sale = Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
         $salesRepository = new EloquentSalesRepository();

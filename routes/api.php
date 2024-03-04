@@ -24,7 +24,7 @@ Route::get('/products', [ProductsController::class, 'index']);
 
 Route::get('/sales', [SalesController::class, 'index']);
 Route::get('/sales/{id}', [SalesController::class, 'show']);
-Route::get('/sales/status/completed', [SalesController::class, 'showCompletedSales']);
+Route::get('/sales/status/complete', [SalesController::class, 'listCompleteSales']);
 Route::post('/sales', [SalesController::class, 'store']);
 Route::patch('/sales/{id}/cancel', [SalesController::class, 'cancelSale']);
 Route::post('/sales/{id}/add-products', [SalesController::class, 'addProductsToExistingSale']);

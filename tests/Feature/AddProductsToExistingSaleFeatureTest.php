@@ -14,7 +14,7 @@ class addProductsToExistingSaleFeatureTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_add_product_to_completed_existing_sale_feature(): void
+    public function test_add_product_to_complete_existing_sale_feature(): void
     {
         $product1 = Product::create([
             'name' => 'Product 1',
@@ -30,7 +30,7 @@ class addProductsToExistingSaleFeatureTest extends TestCase
 
         $sale = Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
         ProductSale::create([
@@ -173,7 +173,7 @@ class addProductsToExistingSaleFeatureTest extends TestCase
     {
         $sale = Sale::create([
             'amount' => 0,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
         $response = $this->post('/api/sales/'.$sale->id.'/add-products', [

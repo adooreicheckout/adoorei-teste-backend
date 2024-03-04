@@ -29,7 +29,7 @@ class Sale extends Model
     ];
 
     const STATUS_PENDING = 'pending';
-    const STATUS_COMPLETED = 'completed';
+    const STATUS_COMPLETE = 'complete';
     const STATUS_CANCELLED = 'cancelled';
 
     public function products()

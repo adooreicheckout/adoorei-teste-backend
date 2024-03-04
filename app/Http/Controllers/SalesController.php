@@ -13,7 +13,7 @@ use App\Models\Sale;
 use Domain\UseCases\addProductsToExistingSaleUseCase;
 use Domain\UseCases\CancelSaleUseCase;
 use Domain\UseCases\CreateSaleUseCase;
-use Domain\UseCases\ShowCompletedSalesUseCase;
+use Domain\UseCases\ListCompleteSalesUseCase;
 use Domain\UseCases\ShowSaleUseCase;
 use Exception;
 use Illuminate\Http\Request;
@@ -103,17 +103,17 @@ class SalesController extends Controller
     }
 
     /**
-     * Show all sales with status completed
+     * Show all sales with status complete
      */
-    public function showCompletedSales(): JsonResponse
+    public function listCompleteSales(): JsonResponse
     {
         try {
             $salesRepository = new EloquentSalesRepository();
-            $showCompletedSalesUseCase = new ShowCompletedSalesUseCase($salesRepository);
+            $listCompleteSalesUseCase = new ListCompleteSalesUseCase($salesRepository);
 
-            $completedSales = $showCompletedSalesUseCase->execute();
+            $completeSales = $listCompleteSalesUseCase->execute();
 
-            $simpleSalesResource = SimpleSaleResource::collection($completedSales);
+            $simpleSalesResource = SimpleSaleResource::collection($completeSales);
 
             return response()->json($simpleSalesResource);
         } catch (Exception $e) {

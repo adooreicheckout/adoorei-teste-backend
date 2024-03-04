@@ -4,12 +4,12 @@ namespace Tests\Unit;
 
 use App\Database\Repositories\Eloquent\EloquentSalesRepository;
 use App\Models\Sale;
-use Domain\UseCases\ShowCompletedSalesUseCase;
+use Domain\UseCases\ListCompleteSalesUseCase;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ShowCompletedSalesUseCaseTest extends TestCase
+class ListCompleteSalesUseCaseTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -20,7 +20,7 @@ class ShowCompletedSalesUseCaseTest extends TestCase
     {
         Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
         Sale::create([
@@ -30,12 +30,12 @@ class ShowCompletedSalesUseCaseTest extends TestCase
 
         Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_COMPLETED,
+            'status' => Sale::STATUS_COMPLETE,
         ]);
 
         $salesRepository = new EloquentSalesRepository();
 
-        $showSalesUseCase = new ShowCompletedSalesUseCase(
+        $showSalesUseCase = new ListCompleteSalesUseCase(
             $salesRepository,
         );
 
