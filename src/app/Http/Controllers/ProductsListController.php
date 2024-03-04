@@ -29,7 +29,9 @@ class ProductsListController extends Controller
         try {
             return response()->json($this->productService->get(), 200);
         } catch (Exception $ex) {
-
+            return response()->json([
+                'message' => $ex->getMessage()
+            ], 404);
         }
     }
 }

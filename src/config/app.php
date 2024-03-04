@@ -178,6 +178,11 @@ return [
         App\Providers\Products\ProductsRepositoryProvider::class,
         App\Providers\Products\ProductsServiceProvider::class,
 
+        App\Providers\Sales\SalesRepositoryProvider::class,
+        App\Providers\Sales\SalesServiceProvider::class,
+
+        App\Providers\SaleItems\SaleItemsRepositoryProvider::class,
+
     ],
 
     /*

@@ -6,4 +6,5 @@ use App\Repositories\BaseRepositoryContract;
 
 interface ProductRepositoryContract extends BaseRepositoryContract
 {
+    public function getById(string $id): Object;
 }

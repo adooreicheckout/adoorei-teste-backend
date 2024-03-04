@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Products;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class ProductSeeder extends Seeder
 {
@@ -15,14 +16,14 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $products = [
-            ['name' => 'Celular 1', 'price' => 1800, 'description' => 'Lorenzo Ipsulum'],
-            ['name' => 'Celular 2', 'price' => 3200, 'description' => 'Lorem ipsum dolor'],
-            ['name' => 'Celular 3', 'price' => 9800, 'description' => 'Lorem ipsum dolor sit amet']
+            ['product_id' => Uuid::uuid4()->toString(), 'name' => 'Celular 1', 'price' => 1800, 'description' => 'Lorenzo Ipsulum'],
+            ['product_id' => Uuid::uuid4()->toString(), 'name' => 'Celular 2', 'price' => 3200, 'description' => 'Lorem ipsum dolor'],
+            ['product_id' => Uuid::uuid4()->toString(), 'name' => 'Celular 3', 'price' => 9800, 'description' => 'Lorem ipsum dolor sit amet']
         ];
 
         foreach($products as $product)
         {
-            Products::firstOrCreate($product);
+            DB::table('products')->insert($products);
         }
     }
 }

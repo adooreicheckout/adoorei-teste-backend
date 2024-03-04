@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Products extends Model
+class Sales extends Model
 {
-    use HasFactory;
+    protected $table = 'sales';
 
     public $keyType = 'string';
 
     public $incrementing = false;
 
     protected $fillable = [
-        'name',
-        'price',
-        'description'
+        'amount',
+        'status'
     ];
 
     public static function boot()
@@ -25,7 +23,11 @@ class Products extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->product_id = (string) Str::uuid();
+            $model->sale_id = (string) Str::uuid();
         });
+    }
+
+    public function saleItem() {
+        return $this->hasMany('App\Models\SaleItems', 'sale_id', 'sale_id');
     }
 }

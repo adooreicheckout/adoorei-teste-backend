@@ -14,14 +14,14 @@ class CreateSalesTable extends Migration
     public function up()
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->double('amount', 10, 6)->default('0.00');
-            $table->enum('status',[
+            $table->uuid('sale_id')->primary();
+            $table->decimal('amount', 10, 2)->default('00.0');
+            $table->enum('status', [
+                'created',
+                'pending',
                 'paid',
-                'canceled'
-            ]);
+                'cancelled'
+            ])->default('created');
             $table->timestamps();
         });
     }

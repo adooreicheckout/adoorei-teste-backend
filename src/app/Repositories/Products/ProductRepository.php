@@ -5,11 +5,12 @@ namespace App\Repositories\Products;
 use App\Models\Products;
 use App\Repositories\BaseRepository;
 use App\Repositories\Products\Contracts\ProductRepositoryContract;
+use Illuminate\Database\Eloquent\Model;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryContract
 {
     /**
-     * @var Products $consulate
+     * @var Products $model
      */
     protected $model;
 
@@ -19,5 +20,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryContr
     public function __construct(Products $products)
     {
         $this->model = $products;
+    }
+
+    /**
+     * @param string $id
+     * @return Model
+     */
+    public function getById(string $id): Object
+    {
+        return $this->model->where('product_id', $id)->first();
     }
 }
