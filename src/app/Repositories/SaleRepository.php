@@ -91,7 +91,7 @@ class SaleRepository implements SaleContract
                 }
                 $saleProduct = new SaleProduct();
                 $saleProduct->products()->associate($productModel);
-                $saleProduct->sales_id = $sale->sales_id;
+                $saleProduct->sale()->associate($sale);
                 $saleProduct->amount = $product['amount'];
                 $saleProduct->save();
             }
