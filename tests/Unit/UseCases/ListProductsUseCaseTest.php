@@ -8,8 +8,6 @@ use Domain\UseCases\ListProductsUseCase;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ListProductsUseCaseTest extends TestCase
 {
@@ -39,7 +37,7 @@ class ListProductsUseCaseTest extends TestCase
         $listProductsUseCase = new ListProductsUseCase($productsRepository);
         $productsListed = $listProductsUseCase->execute();
 
-        $this->assertTrue(count($productsListed) === 2);
+        $this->assertEquals(count($productsListed), 2);
     }
 
     public function test_list_with_no_products(): void
@@ -48,6 +46,6 @@ class ListProductsUseCaseTest extends TestCase
         $listProductsUseCase = new ListProductsUseCase($productsRepository);
         $productsListed = $listProductsUseCase->execute();
 
-        $this->assertTrue(count($productsListed) === 0);
+        $this->assertEquals(count($productsListed), 0);
     }
 }

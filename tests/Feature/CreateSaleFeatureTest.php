@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Database\Repositories\Eloquent\EloquentProductsRepository;
 use App\Models\Product;
-use Domain\UseCases\ListProductsUseCase;
 use Tests\TestCase;
 use Illuminate\Http\Response;
 
@@ -63,12 +61,11 @@ class CreateSaleFeatureTest extends TestCase
         ]);
 
         $response->assertStatus(Response::HTTP_CREATED);
-        $this->assertTrue($response['amount'] === 800);
+        $this->assertEquals($response['amount'], 800);
     }
 
     public function test_create_sales_no_products_feature(): void
     {
-
         $product1 = Product::create([
             'name' => 'Product 1',
             'description' => 'Product 1 description',
@@ -77,7 +74,7 @@ class CreateSaleFeatureTest extends TestCase
 
         $response = $this->post('/api/sales');
 
-        $this->assertTrue($response->exception->status === Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertEquals($response->exception->status, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function test_create_sales_with_products_which_dont_exist_feature(): void
@@ -98,7 +95,7 @@ class CreateSaleFeatureTest extends TestCase
             ]
         ]);
 
-        $this->assertTrue($response->exception->status === Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertEquals($response->exception->status, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
 }

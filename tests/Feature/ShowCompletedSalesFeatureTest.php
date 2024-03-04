@@ -2,18 +2,11 @@
 
 namespace Tests\Unit;
 
-use App\Database\Repositories\Eloquent\EloquentProductsRepository;
-use App\Database\Repositories\Eloquent\EloquentSalesRepository;
-use App\Models\Product;
-use App\Models\ProductSale;
 use App\Models\Sale;
-use Domain\UseCases\CreateSaleUseCase;
-use Domain\UseCases\ShowSaleUseCase;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Http\Response;
 
 class ShowCompletedSalesFeatureTest extends TestCase
 {
@@ -40,7 +33,7 @@ class ShowCompletedSalesFeatureTest extends TestCase
         ]);
 
         $response = $this->get('/api/sales/status/completed');
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
 
         $completedSalesResponse = json_decode($response->getContent());
 
@@ -51,6 +44,6 @@ class ShowCompletedSalesFeatureTest extends TestCase
     {
         $response = $this->get('/api/sales/100');
 
-        $response->assertStatus(404);
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
 }

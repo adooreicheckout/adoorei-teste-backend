@@ -7,13 +7,10 @@ use App\Database\Repositories\Eloquent\EloquentSalesRepository;
 use App\Models\Product;
 use App\Models\ProductSale;
 use App\Models\Sale;
-use Domain\UseCases\addProductsToExistingSaleUseCase;
-use Domain\UseCases\CreateSaleUseCase;
+use Domain\UseCases\AddProductsToExistingSaleUseCase;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class addProductsToExistingSaleUseCaseTest extends TestCase
 {
@@ -49,7 +46,7 @@ class addProductsToExistingSaleUseCaseTest extends TestCase
         ]);
 
         ProductSale::create([
-            'product_id' => $product1->id,
+            'product_id' => $product2->id,
             'sale_id' => $sale->id,
             'amount' => 2,
             'price' => 200,
@@ -58,12 +55,12 @@ class addProductsToExistingSaleUseCaseTest extends TestCase
         $salesRepository = new EloquentSalesRepository();
         $productsRepository = new EloquentProductsRepository();
 
-        $createSalesUseCase = new addProductsToExistingSaleUseCase(
+        $addProductsToExistingSalesUseCase = new AddProductsToExistingSaleUseCase(
             $salesRepository,
             $productsRepository
         );
 
-        $result = $createSalesUseCase->execute([
+        $result = $addProductsToExistingSalesUseCase->execute([
             'products' => [
                 [
                     'id' => $product1->id,
@@ -71,7 +68,6 @@ class addProductsToExistingSaleUseCaseTest extends TestCase
                 ],
             ]
         ], $sale->id);
-
 
         $this->assertNotNull($result['id']);
         $this->assertEquals($result['amount'], 700);

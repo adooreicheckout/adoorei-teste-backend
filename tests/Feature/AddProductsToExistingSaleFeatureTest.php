@@ -2,27 +2,18 @@
 
 namespace Tests\Unit;
 
-use App\Database\Repositories\Eloquent\EloquentProductsRepository;
-use App\Database\Repositories\Eloquent\EloquentSalesRepository;
 use App\Models\Product;
 use App\Models\ProductSale;
 use App\Models\Sale;
-use Domain\UseCases\CreateSaleUseCase;
-use Domain\UseCases\ShowSaleUseCase;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\Response;
 
 class addProductsToExistingSaleFeatureTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic unit test example.
-     */
     public function test_add_product_to_completed_existing_sale_feature(): void
     {
         $product1 = Product::create([
@@ -194,7 +185,7 @@ class addProductsToExistingSaleFeatureTest extends TestCase
             ],
         ]);
 
-        $this->assertTrue($response->exception->status === Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertEquals($response->exception->status, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
 }

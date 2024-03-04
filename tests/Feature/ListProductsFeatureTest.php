@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Database\Repositories\Eloquent\EloquentProductsRepository;
 use App\Models\Product;
-use Domain\UseCases\ListProductsUseCase;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -31,9 +30,8 @@ class ListProductsFeatureTest extends TestCase
         ]);
 
         $this->get('/api/products')
-            ->assertStatus(200)
+            ->assertStatus(Response::HTTP_OK)
             ->assertJsonCount(2);
-
     }
 
 }

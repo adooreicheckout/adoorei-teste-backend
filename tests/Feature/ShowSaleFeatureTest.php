@@ -2,18 +2,13 @@
 
 namespace Tests\Unit;
 
-use App\Database\Repositories\Eloquent\EloquentProductsRepository;
-use App\Database\Repositories\Eloquent\EloquentSalesRepository;
 use App\Models\Product;
 use App\Models\ProductSale;
 use App\Models\Sale;
-use Domain\UseCases\CreateSaleUseCase;
-use Domain\UseCases\ShowSaleUseCase;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Http\Response;
 
 class ShowSaleFeatureTest extends TestCase
 {
@@ -49,23 +44,25 @@ class ShowSaleFeatureTest extends TestCase
         ]);
 
         ProductSale::create([
-            'product_id' => $product1->id,
+            'product_id' => $product2->id,
             'sale_id' => $sale->id,
             'amount' => 2,
             'price' => 200,
         ]);
 
         $response = $this->get('/api/sales/'.$sale->id);
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
         $response->assertJson([
             'sale_id' => $sale->id,
             'amount' => 500,
             'products' => [
                 [
+                    'product_id' => $product1->id,
                     'amount' => 1,
                     'price' => 100,
                 ],
                 [
+                    'product_id' => $product2->id,
                     'amount' => 2,
                     'price' => 200,
                 ],
@@ -77,6 +74,6 @@ class ShowSaleFeatureTest extends TestCase
     {
         $response = $this->get('/api/sales/100');
 
-        $response->assertStatus(404);
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
 }

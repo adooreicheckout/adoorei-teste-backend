@@ -30,12 +30,12 @@ class CreateSaleUseCaseTest extends TestCase
         $salesRepository = new EloquentSalesRepository();
         $productsRepository = new EloquentProductsRepository();
 
-        $createSalesUseCase = new CreateSaleUseCase(
+        $createSaleUseCase = new CreateSaleUseCase(
             $salesRepository,
             $productsRepository
         );
 
-        $result = $createSalesUseCase->execute([
+        $result = $createSaleUseCase->execute([
             'products' => [
                 [
                     'id' => $product->id,
