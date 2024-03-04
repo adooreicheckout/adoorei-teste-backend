@@ -32,4 +32,9 @@ class ProductSale extends Model
         'price' => 'float',
         'amount' => 'integer',
     ];
+
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
 }

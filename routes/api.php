@@ -27,5 +27,5 @@ Route::get('/sales/{id}', [SalesController::class, 'show']);
 Route::get('/sales/status/completed', [SalesController::class, 'showCompletedSales']);
 Route::post('/sales', [SalesController::class, 'store']);
 Route::patch('/sales/{id}/cancel', [SalesController::class, 'cancelSale']);
-Route::post('/sales/add-product', [SalesController::class, 'addProduct']);
+Route::post('/sales/{id}/add-products', [SalesController::class, 'addProductsToExistingSale']);
 

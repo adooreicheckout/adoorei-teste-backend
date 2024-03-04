@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\Eloquent\EloquentProductsRepository;
 use App\Database\Repositories\Eloquent\EloquentSalesRepository;
 use App\Exceptions\SaleAlreadyCanceledException;
+use App\Http\Requests\AddProductsToExistingSaleRequest;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Resources\SaleWithProductsResource;
 use App\Http\Resources\SimpleSaleResource;
 use App\Models\Sale;
+use Domain\UseCases\addProductsToExistingSaleUseCase;
 use Domain\UseCases\CancelSaleUseCase;
 use Domain\UseCases\CreateSaleUseCase;
 use Domain\UseCases\ShowCompletedSalesUseCase;
@@ -21,14 +23,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SalesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -123,9 +117,38 @@ class SalesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function addProductsToExistingSale(AddProductsToExistingSaleRequest $request, string $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $salesRepository = new EloquentSalesRepository();
+            $productsRepository = new EloquentProductsRepository();
+
+            $addProductsToExistingSaleUseCase = new AddProductsToExistingSaleUseCase(
+                $salesRepository, $productsRepository
+            );
+
+            $saleCreated = $addProductsToExistingSaleUseCase->execute($request->all(), $id);
+
+            $saleCreatedResource = new SaleWithProductsResource($saleCreated);
+
+            DB::commit();
+            return response()->json($saleCreatedResource, Response::HTTP_CREATED);
+        } catch (SaleAlreadyCanceledException $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Resource not found'
+            ], Response::HTTP_NOT_FOUND);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            dd($e);
+            return $this->handleUnexpectedError();
+        }
     }
 
     /**

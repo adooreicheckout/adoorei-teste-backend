@@ -49,7 +49,7 @@ class EloquentSalesRepository implements SalesRepository
 
     public function findByIdWithProducts($saleId)
     {
-        $sale = Sale::with('products')->findOrFail($saleId);
+        $sale = Sale::with('products.product')->findOrFail($saleId);
 
         return $sale;
     }
