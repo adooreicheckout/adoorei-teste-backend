@@ -50,7 +50,7 @@ class SaleRepository implements SaleContract
 
             foreach ($data['products'] as $product) {
                 $saleProduct = new SaleProduct();
-                $saleProduct->sales_id = $sale->sales_id;
+                $saleProduct->sale()->associate($sale);
                 $saleProduct->fill($product);
                 $saleProduct->save();
             }
