@@ -14,7 +14,7 @@ services:
   database:
     hostname: ${DB_HOST}
     image: mysql:5.7.22
-    container_name: adoorei-database
+    container_name: adoorei-database-eduardo
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -31,7 +31,7 @@ services:
     networks:
       adoorei-network:
         aliases:
-          - adoorei-database
+          - adoorei-database-eduardo
 
   # Generate backend server
   backend:
