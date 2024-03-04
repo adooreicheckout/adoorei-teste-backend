@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/app/phpunit.xml" tests="19" assertions="49" errors="0" failures="0" skipped="0" time="0.300337">
+    <testsuite name="Unit" tests="11" assertions="11" errors="0" failures="0" skipped="0" time="0.008844">
+      <testsuite name="Tests\Unit\Modules\Product\List\UseCaseTest" file="/app/tests/Unit/Modules/Product/List/UseCaseTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.006137">
+        <testsuite name="Tests\Unit\Modules\Product\List\UseCaseTest::testShouldExecuteUseCaseWithSuccess" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.005637">
+          <testcase name="testShouldExecuteUseCaseWithSuccess with data set #0" file="/app/tests/Unit/Modules/Product/List/UseCaseTest.php" line="38" class="Tests\Unit\Modules\Product\List\UseCaseTest" classname="Tests.Unit.Modules.Product.List.UseCaseTest" assertions="1" time="0.005405"/>
+          <testcase name="testShouldExecuteUseCaseWithSuccess with data set #1" file="/app/tests/Unit/Modules/Product/List/UseCaseTest.php" line="38" class="Tests\Unit\Modules\Product\List\UseCaseTest" classname="Tests.Unit.Modules.Product.List.UseCaseTest" assertions="1" time="0.000232"/>
+        </testsuite>
+        <testsuite name="Tests\Unit\Modules\Product\List\UseCaseTest::testShouldExecuteUseCaseWithException" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.000500">
+          <testcase name="testShouldExecuteUseCaseWithException with data set #0" file="/app/tests/Unit/Modules/Product/List/UseCaseTest.php" line="52" class="Tests\Unit\Modules\Product\List\UseCaseTest" classname="Tests.Unit.Modules.Product.List.UseCaseTest" assertions="1" time="0.000255"/>
+          <testcase name="testShouldExecuteUseCaseWithException with data set #1" file="/app/tests/Unit/Modules/Product/List/UseCaseTest.php" line="52" class="Tests\Unit\Modules\Product\List\UseCaseTest" classname="Tests.Unit.Modules.Product.List.UseCaseTest" assertions="1" time="0.000245"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="Tests\Unit\Modules\Sale\Create\UseCaseTest" file="/app/tests/Unit/Modules/Sale/Create/UseCaseTest.php" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="0.001267">
+        <testsuite name="Tests\Unit\Modules\Sale\Create\UseCaseTest::testShouldExecuteUseCaseWithSuccess" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.000819">
+          <testcase name="testShouldExecuteUseCaseWithSuccess with data set #0" file="/app/tests/Unit/Modules/Sale/Create/UseCaseTest.php" line="40" class="Tests\Unit\Modules\Sale\Create\UseCaseTest" classname="Tests.Unit.Modules.Sale.Create.UseCaseTest" assertions="1" time="0.000819"/>
+        </testsuite>
+        <testsuite name="Tests\Unit\Modules\Sale\Create\UseCaseTest::testShouldExecuteUseCaseWithException" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.000448">
+          <testcase name="testShouldExecuteUseCaseWithException with data set #0" file="/app/tests/Unit/Modules/Sale/Create/UseCaseTest.php" line="54" class="Tests\Unit\Modules\Sale\Create\UseCaseTest" classname="Tests.Unit.Modules.Sale.Create.UseCaseTest" assertions="1" time="0.000231"/>
+          <testcase name="testShouldExecuteUseCaseWithException with data set #1" file="/app/tests/Unit/Modules/Sale/Create/UseCaseTest.php" line="54" class="Tests\Unit\Modules\Sale\Create\UseCaseTest" classname="Tests.Unit.Modules.Sale.Create.UseCaseTest" assertions="1" time="0.000217"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="Tests\Unit\Modules\Sale\List\UseCaseTest" file="/app/tests/Unit/Modules/Sale/List/UseCaseTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.001440">
+        <testsuite name="Tests\Unit\Modules\Sale\List\UseCaseTest::testShouldExecuteUseCaseWithSuccess" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001007">
+          <testcase name="testShouldExecuteUseCaseWithSuccess with data set #0" file="/app/tests/Unit/Modules/Sale/List/UseCaseTest.php" line="40" class="Tests\Unit\Modules\Sale\List\UseCaseTest" classname="Tests.Unit.Modules.Sale.List.UseCaseTest" assertions="1" time="0.000821"/>
+          <testcase name="testShouldExecuteUseCaseWithSuccess with data set #1" file="/app/tests/Unit/Modules/Sale/List/UseCaseTest.php" line="40" class="Tests\Unit\Modules\Sale\List\UseCaseTest" classname="Tests.Unit.Modules.Sale.List.UseCaseTest" assertions="1" time="0.000186"/>
+        </testsuite>
+        <testsuite name="Tests\Unit\Modules\Sale\List\UseCaseTest::testShouldExecuteUseCaseWithException" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.000433">
+          <testcase name="testShouldExecuteUseCaseWithException with data set #0" file="/app/tests/Unit/Modules/Sale/List/UseCaseTest.php" line="54" class="Tests\Unit\Modules\Sale\List\UseCaseTest" classname="Tests.Unit.Modules.Sale.List.UseCaseTest" assertions="1" time="0.000219"/>
+          <testcase name="testShouldExecuteUseCaseWithException with data set #1" file="/app/tests/Unit/Modules/Sale/List/UseCaseTest.php" line="54" class="Tests\Unit\Modules\Sale\List\UseCaseTest" classname="Tests.Unit.Modules.Sale.List.UseCaseTest" assertions="1" time="0.000214"/>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Integration" tests="8" assertions="38" errors="0" failures="0" skipped="0" time="0.291492">
+      <testsuite name="Tests\Integration\Http\Controllers\Api\v1\ProductControllerTest" file="/app/tests/Integration/Http/Controllers/Api/v1/ProductControllerTest.php" tests="2" assertions="29" errors="0" failures="0" skipped="0" time="0.177277">
+        <testcase name="testShouldCallRouteAndReturnStatus200" file="/app/tests/Integration/Http/Controllers/Api/v1/ProductControllerTest.php" line="22" class="Tests\Integration\Http\Controllers\Api\v1\ProductControllerTest" classname="Tests.Integration.Http.Controllers.Api.v1.ProductControllerTest" assertions="28" time="0.147911"/>
+        <testcase name="testShouldCallRouteAndReturnStatus500" file="/app/tests/Integration/Http/Controllers/Api/v1/ProductControllerTest.php" line="30" class="Tests\Integration\Http\Controllers\Api\v1\ProductControllerTest" classname="Tests.Integration.Http.Controllers.Api.v1.ProductControllerTest" assertions="1" time="0.029366"/>
+      </testsuite>
+      <testsuite name="Tests\Integration\Http\Controllers\Api\v1\SaleControllerControllerTest" file="/app/tests/Integration/Http/Controllers/Api/v1/SaleControllerControllerTest.php" tests="6" assertions="9" errors="0" failures="0" skipped="0" time="0.114215">
+        <testcase name="testShouldCallCreateSaleRouteAndReturnStatus201" file="/app/tests/Integration/Http/Controllers/Api/v1/SaleControllerControllerTest.php" line="24" class="Tests\Integration\Http\Controllers\Api\v1\SaleControllerControllerTest" classname="Tests.Integration.Http.Controllers.Api.v1.SaleControllerControllerTest" assertions="4" time="0.029284"/>
+        <testcase name="testShouldCallCreateSaleRouteAndReturnStatus500" file="/app/tests/Integration/Http/Controllers/Api/v1/SaleControllerControllerTest.php" line="52" class="Tests\Integration\Http\Controllers\Api\v1\SaleControllerControllerTest" classname="Tests.Integration.Http.Controllers.Api.v1.SaleControllerControllerTest" assertions="1" time="0.023946"/>
+        <testsuite name="Tests\Integration\Http\Controllers\Api\v1\SaleControllerControllerTest::testShouldCallCreateSaleRouteAndReturnStatus422" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="0.038821">
+          <testcase name="testShouldCallCreateSaleRouteAndReturnStatus422 with data set #0" file="/app/tests/Integration/Http/Controllers/Api/v1/SaleControllerControllerTest.php" line="82" class="Tests\Integration\Http\Controllers\Api\v1\SaleControllerControllerTest" classname="Tests.Integration.Http.Controllers.Api.v1.SaleControllerControllerTest" assertions="1" time="0.014471"/>
+          <testcase name="testShouldCallCreateSaleRouteAndReturnStatus422 with data set #1" file="/app/tests/Integration/Http/Controllers/Api/v1/SaleControllerControllerTest.php" line="82" class="Tests\Integration\Http\Controllers\Api\v1\SaleControllerControllerTest" classname="Tests.Integration.Http.Controllers.Api.v1.SaleControllerControllerTest" assertions="1" time="0.012142"/>
+          <testcase name="testShouldCallCreateSaleRouteAndReturnStatus422 with data set #2" file="/app/tests/Integration/Http/Controllers/Api/v1/SaleControllerControllerTest.php" line="82" class="Tests\Integration\Http\Controllers\Api\v1\SaleControllerControllerTest" classname="Tests.Integration.Http.Controllers.Api.v1.SaleControllerControllerTest" assertions="1" time="0.012208"/>
+        </testsuite>
+        <testcase name="testShouldCallListSaleRouteAndReturnStatus500" file="/app/tests/Integration/Http/Controllers/Api/v1/SaleControllerControllerTest.php" line="87" class="Tests\Integration\Http\Controllers\Api\v1\SaleControllerControllerTest" classname="Tests.Integration.Http.Controllers.Api.v1.SaleControllerControllerTest" assertions="1" time="0.022164"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
