@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\Repositories\Sale as SaleContract;
 use App\Enum\SaleStatus;
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleProduct;
 use Illuminate\Contracts\Pagination\Paginator;
@@ -76,11 +77,22 @@ class SaleRepository implements SaleContract
             $sale->status = SaleStatus::completed()->value;
             $sale->save();
 
+            $saleProducts = SaleProduct::query()
+                ->where('sales_id', $sale->sales_id)
+                ->get();
+            foreach ($saleProducts as $saleP) {
+                $saleP->delete();
+            }
+
             foreach ($data['products'] as $product) {
-                $saleProduct = SaleProduct::query()
-                    ->where('sales_id', $sale->sales_id)
-                    ->where('product_id', $product['product_id'])->first();
-                $saleProduct->fill($product);
+                $productModel = Product::query()->find($product['product_id']);
+                if (!$productModel) {
+                    throw new \Exception('Product not found');
+                }
+                $saleProduct = new SaleProduct();
+                $saleProduct->products()->associate($productModel);
+                $saleProduct->sales_id = $sale->sales_id;
+                $saleProduct->amount = $product['amount'];
                 $saleProduct->save();
             }
 

@@ -26,6 +26,12 @@ class SaleController extends Controller
         try {
             $filter = $request->validated();
             $sales = $this->saleService->list($filter);
+            if (empty($sales)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Nenhuma venda encontrada!'
+                ], 404);
+            }
             return response()->json($sales);
         }catch (\Exception $e) {
             return response()->json([
@@ -33,14 +39,6 @@ class SaleController extends Controller
                 'message' => 'Erro ao listar as vendas! - Exception: ' . $e->getMessage()
             ], 500);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**

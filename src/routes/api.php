@@ -25,6 +25,6 @@ Route::group(['prefix' => 'sales'], function () {
     Route::get('/', [SaleController::class, 'index'])->name('sales.index');
     Route::get('/{id}', [SaleController::class, 'show'])->name('sales.show');
     Route::post('/', [SaleController::class, 'store'])->name('sales.store');
-    Route::post('/{id}', [SaleController::class, 'update'])->name('sales.update');
+    Route::patch('/{id}', [SaleController::class, 'update'])->name('sales.update');
     Route::delete('/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
 });
