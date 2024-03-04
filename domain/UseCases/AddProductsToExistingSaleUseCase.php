@@ -15,7 +15,7 @@ class AddProductsToExistingSaleUseCase
         protected ProductsRepository $productsRepository
     ) {}
 
-    public function execute($data, $id)
+    public function execute(array $data, int $id): Sale | SaleAlreadyCanceledException
     {
         $sale = $this->salesRepository->findByIdWithProducts($id);
 

@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    function handleUnexpectedError($additionalData = []): \Illuminate\Http\JsonResponse
+    function handleUnexpectedError(array $additionalData = []): \Illuminate\Http\JsonResponse
     {
         $dataToLog = array_merge(
             [

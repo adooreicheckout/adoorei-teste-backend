@@ -5,7 +5,6 @@ namespace Domain\UseCases;
 use App\Models\Sale;
 use Domain\Repositories\ProductsRepository;
 use Domain\Repositories\SalesRepository;
-use Exception;
 
 class CreateSaleUseCase
 {
@@ -14,7 +13,7 @@ class CreateSaleUseCase
         protected ProductsRepository $productsRepository
     ) {}
 
-    public function execute($data)
+    public function execute(array $data): Sale
     {
         $sale = $this->salesRepository->create([
             'status' => Sale::STATUS_PENDING,

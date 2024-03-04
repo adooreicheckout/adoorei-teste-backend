@@ -2,12 +2,16 @@
 
 namespace Domain\Repositories;
 
+use App\Models\ProductSale;
+use App\Models\Sale;
+use Illuminate\Database\Eloquent\Collection;
+
 interface SalesRepository
 {
-    public function create($data);
-    public function findById($saleId);
-    public function findByIdWithProducts($saleId);
-    public function findByStatus($status);
-    public function update($data, $saleId);
-    public function createProductsBySale($data, $saleId);
+    public function create(array $data): Sale;
+    public function findById(int $saleId): Sale;
+    public function findByIdWithProducts(int $saleId): Sale;
+    public function findByStatus(string $status): Collection;
+    public function update(array $data, Sale $sale): Sale;
+    public function createProductsBySale(array $data, int $saleId): ProductSale;
 }

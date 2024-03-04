@@ -14,10 +14,10 @@ class AddProductsToExistingSaleRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation()
+    public function prepareForValidation(): void
     {
         $this->mergeIfMissing([
-            'products'  => []
+            'products' => []
         ]);
     }
 
