@@ -15,7 +15,7 @@ class ListSalesFeatureTest extends TestCase
     /**
      * A basic unit test example.
      */
-    public function test_show_sale_that_exists_feature(): void
+    public function test_list_sales_feature(): void
     {
         Sale::create([
             'amount' => 500,
