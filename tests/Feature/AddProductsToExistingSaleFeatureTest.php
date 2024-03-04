@@ -95,7 +95,7 @@ class addProductsToExistingSaleFeatureTest extends TestCase
 
         $sale = Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_CANCELLED,
+            'status' => Sale::STATUS_CANCELED,
         ]);
 
         ProductSale::create([
@@ -140,7 +140,7 @@ class addProductsToExistingSaleFeatureTest extends TestCase
 
         $sale = Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_CANCELLED,
+            'status' => Sale::STATUS_CANCELED,
         ]);
 
         ProductSale::create([

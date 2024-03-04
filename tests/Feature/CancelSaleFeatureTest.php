@@ -26,7 +26,7 @@ class CancelSaleFeatureTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJson([
             'id' => $sale->id,
-            'status' => Sale::STATUS_CANCELLED,
+            'status' => Sale::STATUS_CANCELED,
         ]);
     }
 
@@ -34,7 +34,7 @@ class CancelSaleFeatureTest extends TestCase
     {
         $sale = Sale::create([
             'amount' => 500,
-            'status' => Sale::STATUS_CANCELLED,
+            'status' => Sale::STATUS_CANCELED,
         ]);
 
         $response = $this->patch('/api/sales/'.$sale->id.'/cancel');
@@ -47,7 +47,7 @@ class CancelSaleFeatureTest extends TestCase
         $sale = Sale::create([
             'id' => 1000,
             'amount' => 500,
-            'status' => Sale::STATUS_CANCELLED,
+            'status' => Sale::STATUS_CANCELED,
         ]);
 
         $response = $this->patch('/api/sales/'.$sale->id.'/cancel');

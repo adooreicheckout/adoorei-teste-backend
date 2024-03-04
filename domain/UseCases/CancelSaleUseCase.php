@@ -14,12 +14,12 @@ class CancelSaleUseCase
     {
         $sale = $this->salesRepository->findById($id);
 
-        if ($sale->status === Sale::STATUS_CANCELLED) {
+        if ($sale->status === Sale::STATUS_CANCELED) {
             throw new SaleAlreadyCanceledException();
         }
 
         $saleUpdated = $this->salesRepository->update([
-            'status' => Sale::STATUS_CANCELLED,
+            'status' => Sale::STATUS_CANCELED,
         ], $sale);
 
         return $sale;

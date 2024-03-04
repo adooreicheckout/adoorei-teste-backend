@@ -32,7 +32,7 @@ class CancelSaleUseCaseTest extends TestCase
         $result = $cancelSalesUseCase->execute($sale->id);
 
         $this->assertNotNull($result['id']);
-        $this->assertEquals($result['status'], Sale::STATUS_CANCELLED);
+        $this->assertEquals($result['status'], Sale::STATUS_CANCELED);
     }
 
 }

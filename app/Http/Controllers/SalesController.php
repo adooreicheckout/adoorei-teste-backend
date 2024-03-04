@@ -87,7 +87,7 @@ class SalesController extends Controller
 
             return response()->json([
                 'id' => $id,
-                'status' => Sale::STATUS_CANCELLED,
+                'status' => Sale::STATUS_CANCELED,
             ]);
         } catch (SaleAlreadyCanceledException $e) {
             return response()->json([
