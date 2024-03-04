@@ -9,6 +9,8 @@ volumes:
         driver: local
 
 services:
+
+  # Generate database server
   database:
     hostname: ${DB_HOST}
     image: mysql:5.7.22
@@ -31,24 +33,11 @@ services:
         aliases:
           - adoorei-database
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: adoorei-phpmyadmin
-    environment:
-      PMA_HOST: ${DB_HOST}
-      PMA_PORT: ${DB_PORT}
-    ports:
-      - 8001:80
-    networks:
-      adoorei-network:
-        aliases:
-          - adoorei-phpmyadmin
-
   # Generate backend server
   backend:
     build: .
     restart: always
-    container_name: adoorei-backend
+    container_name: adoorei-backend-eduardo
     ports:
       - 8000:8000
     volumes:
