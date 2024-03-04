@@ -27,9 +27,9 @@ Apenas 2 adendos.
 
 Não use a variável `DB_HOST` como 'localhost', pois pode ocorrer conflito no docker. <br>
 
-Não use a variável `DB_USERNAME` como 'root', se desejar 'root' não informe a variável.
-Ao informar DB_USERNAME como root, o MySQL tenta criar um usuário 'root' pela segunda vez.
-Como destacado na seguinte issue do github.
+Não use a variável `DB_USERNAME` como 'root', se desejar usar 'root' não informe a variável. <br>
+Ao informar DB_USERNAME como 'root', o MySQL tenta criar um usuário 'root' pela segunda vez e gera um erro na criação do container. <br>
+Problema destacado na seguinte issue do github.
 https://github.com/docker-library/mysql/issues/129 
 
 ## UNIT TESTS
