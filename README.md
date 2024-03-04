@@ -6,8 +6,6 @@
 
 1. Crie o arquivo `.env` baseado em `.env.example`
 
-    1. Altere o arquivo `.env` conforme as necessidades do seu ambiente
-
 
 2. Execute o script deploy.sh dentro da pasta src/
 
