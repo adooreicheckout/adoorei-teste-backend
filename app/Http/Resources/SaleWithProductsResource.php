@@ -17,7 +17,7 @@ class SaleWithProductsResource extends JsonResource
         return [
             'sale_id' => $this->id,
             'amount' => $this->amount,
-            'products' => ProductsForSaleWithDetailsResource::collection($this->products),
+            'products' => ProductForSaleWithDetailsResource::collection($this->products),
         ];
     }
 }
