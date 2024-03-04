@@ -1,0 +1,51 @@
+version: "3"
+
+networks:
+  adoorei-network:
+    driver: bridge
+
+volumes:
+    database_data:
+        driver: local
+
+services:
+
+  # Generate database server
+  database:
+    hostname: ${DB_HOST}
+    image: mysql:5.7.22
+    container_name: adoorei-database-eduardo
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - database_data:/var/db
+    ports:
+      - ${DB_PORT}:3306
+    healthcheck:
+        test: ["CMD-SHELL", "mysqladmin -u $$MYSQL_USER -p$$MYSQL_PASSWORD ping -h localhost || exit 1"]
+        timeout: 5s
+        retries: 10
+    networks:
+      adoorei-network:
+        aliases:
+          - adoorei-database-eduardo
+
+  # Generate backend server
+  backend:
+    build: .
+    restart: always
+    container_name: adoorei-backend-eduardo
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/var/www
+      -  /var/www/vendor
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - adoorei-network
+

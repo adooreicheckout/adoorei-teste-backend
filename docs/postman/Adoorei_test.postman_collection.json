@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "564c2d58-4579-4d0b-8034-54608147b531",
+		"name": "Adoorei-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33364290"
+	},
+	"item": [
+		{
+			"name": "Listar Produtos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products"
+					]
+				},
+				"description": "## Descrição\n\n`api/products`\n\nListagem de produtos\n\n## Resposta\n\nRetorna uma array de objetos.\n\n``` json\n[\n    {\n        \"name\": \"Mac 13\",\n        \"price\": 10000,\n        \"description\": \"Um computador adoorável - Mac 13\"\n    },\n    {\n        \"name\": \"Mac 14\",\n        \"price\": 12000,\n        \"description\": \"Um computador adoorável - Mac 14\"\n    },\n    {\n        \"name\": \"iPhone 13\",\n        \"price\": 4000,\n        \"description\": \"Um celular adoorável - iPhone 13\"\n    },\n    {\n        \"name\": \"iPhone 14\",\n        \"price\": 5000,\n        \"description\": \"Um celular adoorável - iPhone 14\"\n    },\n    {\n        \"name\": \"iPhone 15\",\n        \"price\": 6000.15,\n        \"description\": \"Um celular adoorável - iPhone 15\"\n    }\n]\n\n ```\n\nOs objetos possuem os seguintes campos:  \n`name` é o nome do produto. Tipo: string  \n`description` é a descrição do produto. Tipo: string  \n`price` é o preço do produto. Tipo: decimal"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Vendas Realizadas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/sales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"sales"
+					]
+				},
+				"description": "## Descrição\n\n`api/sales`\n\nListagem de Vendas realizadas\n\n## Resposta\n\nRetorna uma array de objetos. Os objetos possuem os seguintes campos:\n\n``` json\n[\n    {\n        \"id\": 1,\n        \"amount\": 10000,\n        \"status\": \"complete\"\n    },\n        {\n        \"id\": 2,\n        \"amount\": 11000,\n        \"status\": \"complete\"\n    }\n]\n\n ```\n\n`id` é o ID da venda realizada. Tipo: integer.\n\n`amount` é o preço total da venda. Tipo: integer.\n\n`status` é o status do processo da venda. Tipo: string."
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Venda Específica",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/sales/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"sales",
+						"1"
+					]
+				},
+				"description": "## Descrição\n\n`api/sales/{id}`\n\nConsulta de venda específica. O campo referente a `{id}` deve ser o ID da venda.\n\n## Resposta\n\nRetorna um objeto com os seguintes campos:\n\n``` json\n{\n    \"sale_id\": 1,\n    \"amount\": 10000,\n    \"products\": [\n        {\n            \"product_id\": 1,\n            \"name\": \"Mac 13\",\n            \"price\": 10000,\n            \"amount\": 1\n        }\n    ]\n}\n\n ```\n\n`sale_id` é o ID da venda realizada. Tipo: integer.\n\n`amount` é a o preço total da venda. Tipo: integer.\n\n`products` é um array de objetos com os dados dos produtos registrados na venda. Tipo: array.\n\n#### Products\n\nCada objeto de produto terá o seguinte formato.\n\n`product_id` é o ID do produto adquirido. Tipo: integer.\n\n`name` é o nome do produto adquirido. Tipo: string.\n\n`price` é o preço do produto adquirido no momento da compra. Tipo: numeric.\n\n`amount` é a quantidade de produtos adquiridos. Tipo: integer."
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Venda",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/sales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"sales"
+					]
+				},
+				"description": "## Descrição\n\n`api/sales`\n\nCadastro de vendas\n\n## Requisição\n\nDeve receber no corpo da requisição um objeto no seguinte formato.\n\n``` json\n{\n\t\"products\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"amount\": 1\n\t\t}\n\t]\n}\n\n ```\n\n`products` deve ser um array de objetos. Esses objetos devem possuir os seguintes campos:\n\n`id` é o campo referente ao ID do produto que será adicionado na venda. Deve ser de um produto que já existe anteriormente. Tipo: integer.\n\n`amount` é o campo referente a quantidade de itens adquiridos do produto. Tipo: integer.\n\n## Resposta\n\nA resposta será um objeto no seguinte formato.\n\n``` json\n{\n\t\"id\": 1,\n\t\"amount\": 10000,\n\t\"status\": \"complete\"\n}\n\n ```\n\n`id` é o ID da venda realizada. Tipo: integer.\n\n`amount` é o preço total da venda. Tipo: integer.\n\n`status` é o status do processo da venda. Tipo: string."
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar Produtos a uma Venda Existente",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/sales/1/add-products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"sales",
+						"1",
+						"add-products"
+					]
+				},
+				"description": "## Descrição\n\n`api/sales/{id}/add-products`\n\nAdicionar produtos a uma venda já existente. O campo `{id}` deve ser o ID da venda.\n\n## Requisição\n\nDeve receber no corpo da requisição um objeto no seguinte formato.\n\n``` json\n{\n    \"products\": [\n        {\n            \"id\": 1,\n            \"amount\": 1\n        }\n    ]\n}\n\n ```\n\n`products` deve ser um array de objetos. Esses objetos devem possuir os seguintes campos:\n\n`id` é o campo referente ao ID do produto que será adicionado na venda. Deve ser de um produto que já existe anteriormente. Tipo: integer.\n\n`amount` é o campo referente a quantidade de itens adquiridos do produto. Tipo: integer.\n\n## Resposta\n\nRetorna um objeto com os seguintes campos:\n\n``` json\n{\n    \"sale_id\": 1,\n    \"amount\": 30000,\n    \"products\": [\n        {\n            \"product_id\": 1,\n            \"name\": \"Mac 13\",\n            \"price\": 10000,\n            \"amount\": 1\n        },\n        {\n            \"product_id\": 1,\n            \"name\": \"Mac 13\",\n            \"price\": 10000,\n            \"amount\": 2\n        },\n\n    ]\n}\n\n ```\n\n`sale_id` é o ID da venda realizada. Tipo: integer.\n\n`amount` é a o preço total da venda. Tipo: integer.\n\n`products` é um array de objetos com os dados dos produtos registrados na venda. Tipo: array.\n\n#### Products\n\nCada objeto de produto terá o seguinte formato.\n\n`product_id` é o ID do produto adquirido. Tipo: integer.\n\n`name` é o nome do produto adquirido. Tipo: string.\n\n`price` é o preço do produto adquirido no momento da compra. Tipo: numeric.\n\n`amount` é a quantidade de produtos adquiridos. Tipo: integer."
+			},
+			"response": []
+		},
+		{
+			"name": "Cancelar venda",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/sales/1/cancel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"sales",
+						"1",
+						"cancel"
+					]
+				},
+				"description": "## Descrição\n\n`api/sales/{id}/cancel`\n\nCancelar uma venda. O campo `{id}` deve ser o ID da venda.\n\n## Resposta\n\nRetorna um objeto com os seguintes campos:\n\n``` json\n{\n    \"id\": 1,\n    \"status\": \"canceled\"\n}\n\n ```\n\n`id` é o ID da venda realizada. Tipo: integer.\n\n`status` é a o preço total da venda. Tipo: string."
+			},
+			"response": []
+		}
+	]
+}
