@@ -40,12 +40,11 @@ class EloquentSalesRepository implements SalesRepository
         return $sale;
     }
 
-    public function updateSaleStatusById($status, $sale)
+    public function findById($id)
     {
-        $saleUpdated = Sale::where('id', $saleId)
-            ->update(['status' => $status]);
+        $sale = Sale::findOrFail($id);
 
-        return $saleUpdated;
+        return $sale;
     }
 
     public function findByIdWithProducts($saleId)

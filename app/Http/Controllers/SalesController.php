@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Database\Repositories\Eloquent\EloquentProductsRepository;
 use App\Database\Repositories\Eloquent\EloquentSalesRepository;
+use App\Exceptions\SaleAlreadyCanceledException;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Resources\SaleWithProductsResource;
 use App\Http\Resources\SimpleSaleResource;
+use App\Models\Sale;
+use Domain\UseCases\CancelSaleUseCase;
 use Domain\UseCases\CreateSaleUseCase;
 use Domain\UseCases\ShowCompletedSalesUseCase;
 use Domain\UseCases\ShowSaleUseCase;
@@ -68,6 +71,31 @@ class SalesController extends Controller
             $saleCreatedResource = new SaleWithProductsResource($saleCreated);
 
             return response()->json($saleCreatedResource);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Resource not found'
+            ], Response::HTTP_NOT_FOUND);
+        } catch (Exception $e) {
+            return $this->handleUnexpectedError();
+        }
+    }
+
+    public function cancelSale(string $id)
+    {
+        try {
+            $salesRepository = new EloquentSalesRepository();
+            $showSaleUseCase = new CancelSaleUseCase($salesRepository);
+
+            $saleCanceled = $showSaleUseCase->execute($id);
+
+            return response()->json([
+                'id' => $id,
+                'status' => Sale::STATUS_CANCELLED,
+            ]);
+        } catch (SaleAlreadyCanceledException $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'message' => 'Resource not found'

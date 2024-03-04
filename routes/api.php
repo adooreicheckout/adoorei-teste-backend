@@ -26,6 +26,6 @@ Route::get('/sales', [SalesController::class, 'index']);
 Route::get('/sales/{id}', [SalesController::class, 'show']);
 Route::get('/sales/status/completed', [SalesController::class, 'showCompletedSales']);
 Route::post('/sales', [SalesController::class, 'store']);
-Route::patch('/sales/cancel', [SalesController::class, 'cancel']);
+Route::patch('/sales/{id}/cancel', [SalesController::class, 'cancelSale']);
 Route::post('/sales/add-product', [SalesController::class, 'addProduct']);
 
