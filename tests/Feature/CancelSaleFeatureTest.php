@@ -53,6 +53,7 @@ class CancelSaleFeatureTest extends TestCase
     public function test_cancel_unexistent_sale_feature(): void
     {
         $sale = Sale::create([
+            'id' => 1000,
             'amount' => 500,
             'status' => Sale::STATUS_CANCELLED,
         ]);
@@ -61,6 +62,5 @@ class CancelSaleFeatureTest extends TestCase
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-
 
 }
