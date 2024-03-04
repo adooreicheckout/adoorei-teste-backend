@@ -1,3 +1,5 @@
+OBS: Eu nao havia criado o fork antes, achei que só enviaria o github do projeto e você avaliaram, se quiser acompanhar os commits, da para acompanhar: https://github.com/mauriciogerbersc/test/commits/main/
+
 Comandos para rodar aplicação
 
 Dentro da pasta raíz do projeto
