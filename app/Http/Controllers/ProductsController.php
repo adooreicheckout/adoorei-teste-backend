@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Database\Repositories\Eloquent\EloquentProductsRepository;
-use App\Http\Resources\ProductsResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Domain\UseCases\ListProductsUseCase;
 use Exception;
@@ -22,7 +22,7 @@ class ProductsController extends Controller
             $listProductsUseCase = new ListProductsUseCase($productsRepository);
 
             $productsListed = $listProductsUseCase->execute();
-            $productsResource = ProductsResource::collection($productsListed);
+            $productsResource = ProductResource::collection($productsListed);
 
             return response()->json($productsResource);
         } catch (Exception $e) {
