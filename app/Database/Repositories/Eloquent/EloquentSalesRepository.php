@@ -10,6 +10,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class EloquentSalesRepository implements SalesRepository
 {
+    public function findAll(): Collection
+    {
+        $sales = Sale::get();
+
+        return $sales;
+    }
+
     public function create(array $saleData): Sale
     {
         $saleCreated = Sale::create([
@@ -55,10 +62,4 @@ class EloquentSalesRepository implements SalesRepository
         return $sale;
     }
 
-    public function findByStatus(string $status): Collection
-    {
-        $sales = Sale::where('status', $status)->get();
-
-        return $sales;
-    }
 }

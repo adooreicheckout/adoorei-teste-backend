@@ -4,19 +4,19 @@ namespace Tests\Unit;
 
 use App\Database\Repositories\Eloquent\EloquentSalesRepository;
 use App\Models\Sale;
-use Domain\UseCases\ListCompleteSalesUseCase;
+use Domain\UseCases\ListSalesUseCase;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ListCompleteSalesUseCaseTest extends TestCase
+class ListSalesUseCaseTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
      * A basic unit test example.
      */
-    public function test_show_sale_use_case(): void
+    public function test_list_sales_use_case(): void
     {
         Sale::create([
             'amount' => 500,
@@ -35,12 +35,12 @@ class ListCompleteSalesUseCaseTest extends TestCase
 
         $salesRepository = new EloquentSalesRepository();
 
-        $showSalesUseCase = new ListCompleteSalesUseCase(
+        $showSalesUseCase = new ListSalesUseCase(
             $salesRepository,
         );
 
         $result = $showSalesUseCase->execute();
 
-        $this->assertEquals(2, count($result));
+        $this->assertEquals(3, count($result));
     }
 }

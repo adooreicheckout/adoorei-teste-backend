@@ -13,7 +13,7 @@ use App\Models\Sale;
 use Domain\UseCases\addProductsToExistingSaleUseCase;
 use Domain\UseCases\CancelSaleUseCase;
 use Domain\UseCases\CreateSaleUseCase;
-use Domain\UseCases\ListCompleteSalesUseCase;
+use Domain\UseCases\ListSalesUseCase;
 use Domain\UseCases\ShowSaleUseCase;
 use Exception;
 use Illuminate\Http\Request;
@@ -24,6 +24,25 @@ use Illuminate\Http\JsonResponse;
 
 class SalesController extends Controller
 {
+    /**
+     * Show all sales with status complete
+     */
+    public function index(): JsonResponse
+    {
+        try {
+            $salesRepository = new EloquentSalesRepository();
+            $listSalesUseCase = new ListSalesUseCase($salesRepository);
+
+            $completeSales = $listSalesUseCase->execute();
+
+            $simpleSalesResource = SimpleSaleResource::collection($completeSales);
+
+            return response()->json($simpleSalesResource);
+        } catch (Exception $e) {
+            return $this->handleUnexpectedError();
+        }
+    }
+
     /**
      * Store a newly created sale in storage.
      */
@@ -97,25 +116,6 @@ class SalesController extends Controller
             return response()->json([
                 'message' => 'Resource not found'
             ], Response::HTTP_NOT_FOUND);
-        } catch (Exception $e) {
-            return $this->handleUnexpectedError();
-        }
-    }
-
-    /**
-     * Show all sales with status complete
-     */
-    public function listCompleteSales(): JsonResponse
-    {
-        try {
-            $salesRepository = new EloquentSalesRepository();
-            $listCompleteSalesUseCase = new ListCompleteSalesUseCase($salesRepository);
-
-            $completeSales = $listCompleteSalesUseCase->execute();
-
-            $simpleSalesResource = SimpleSaleResource::collection($completeSales);
-
-            return response()->json($simpleSalesResource);
         } catch (Exception $e) {
             return $this->handleUnexpectedError();
         }
