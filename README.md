@@ -20,4 +20,4 @@ Após iniciar os serviços, acesse o projeto em: [http://localhost/api/products]
 
 ## Documentação da API
 
-A documentação da API está disponível em: [Postman](https://documenter.getpostman.com/view/10666691/Tz5tYz8z)
+A documentação da API está disponível em: [Postman](https://documenter.getpostman.com/view/5481454/2sA2xb8GpY)
