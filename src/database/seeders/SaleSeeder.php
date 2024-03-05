@@ -31,21 +31,16 @@ class SaleSeeder extends Seeder
             $sale->status = 'pending';
             $sale->save();
 
-            $range = rand(1, 3);
-            for ($i = 1; $i <= $range; $i++) {
-                $products = Product::factory($range)->create();
-                foreach ($products as $product) {
-                    $salesProducts = new SaleProduct();
-                    $quantity = rand(1, 5);
-                    $total += floatval($product->price) * $quantity;
-                    $salesProducts->products()->associate($product);
-                    $salesProducts->sale()->associate($sale);
-                    $salesProducts->amount = $quantity;
-                    $salesProducts->save();
-                    $salesProductsMany[] = $salesProducts;
-
-                }
-                $sale->salesProducts()->saveMany($salesProductsMany);
+            $range = rand(1, 5);
+            $products = Product::factory($range)->create();
+            foreach ($products as $product) {
+                $salesProducts = new SaleProduct();
+                $quantity = rand(1, 5);
+                $total += floatval($product->price) * $quantity;
+                $salesProducts->products()->associate($product);
+                $salesProducts->sale()->associate($sale);
+                $salesProducts->amount = $quantity;
+                $salesProducts->save();
             }
 
             $sale->amount = $total;
