@@ -1,0 +1,56 @@
+version: '3'
+
+networks:
+    abc_store:
+
+services:
+    nginx:
+        image: nginx:stable-alpine
+        container_name: abc_store_nginx
+        ports:
+            - "8088:80"
+        volumes:
+            - ./src:/var/www/html
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - mysql
+            - php
+            - phpmyadmin
+        networks:
+            - abc_store
+
+    mysql:
+        image: mysql:latest
+        container_name: abc_store_mysql
+        environment:
+            MYSQL_DATABASE: abc_store
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - 3337:3306
+        volumes:
+            - ./mysql:/var/lib/mysql
+        networks:
+            - abc_store
+
+    php:
+        build:
+            context: .
+            dockerfile: dockerFile
+        container_name: abc_store_php
+        volumes:
+            - ./src:/var/www/html
+            - ./php/php.ini:/usr/local/etc/php/php.ini
+        ports:
+            - 9000:9000
+        networks:
+            - abc_store
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: abc_store_phpmyadmin
+        ports:
+            - 8183:80
+        environment:
+            - PMA_ARBITRARY=1
+        networks:
+            - abc_store

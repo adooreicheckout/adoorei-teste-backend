@@ -1,0 +1,652 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API - ABC STORE",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Return a List of Products",
+                "operationId": "0d4648111534322ed2fa5d7f255673af",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "is_available",
+                        "in": "query",
+                        "description": "Is Available",
+                        "required": false,
+                        "schema": {
+                            "type": "bool"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Query performed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Celular"
+                                        },
+                                        "price": {
+                                            "type": "number",
+                                            "example": "1800.76"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Lorenzo Ipsulum"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content - When data doesn't exist"
+                    },
+                    "417": {
+                        "description": "Expectation Failed - When an unexpected error occurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Operation failed."
+                                        },
+                                        "error_message": {
+                                            "type": "string",
+                                            "example": "Error Message."
+                                        },
+                                        "error_file": {
+                                            "type": "string",
+                                            "example": "Error File."
+                                        },
+                                        "error_line": {
+                                            "type": "string",
+                                            "example": "Error Line."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sales": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Return a List of Active Sales",
+                "operationId": "5b98755976e382d02aaf5210b9cc722b",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Query performed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "sales_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "amount": {
+                                            "type": "number",
+                                            "example": "8200.14"
+                                        },
+                                        "products": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "product_id": {
+                                                        "type": "integer",
+                                                        "example": "5"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Celular"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "example": "4100.07"
+                                                    },
+                                                    "amount": {
+                                                        "type": "integer",
+                                                        "example": "2"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content - When data doesn't exist"
+                    },
+                    "417": {
+                        "description": "Expectation Failed - When an unexpected error occurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Operation failed."
+                                        },
+                                        "error_message": {
+                                            "type": "string",
+                                            "example": "Error Message."
+                                        },
+                                        "error_file": {
+                                            "type": "string",
+                                            "example": "Error File."
+                                        },
+                                        "error_line": {
+                                            "type": "string",
+                                            "example": "Error Line."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Create a New Sale",
+                "operationId": "68c6c3bd5aa09d6474a2b1cc81154904",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "is_active",
+                                    "products"
+                                ],
+                                "properties": {
+                                    "is_active": {
+                                        "description": "Indicates if the request is active",
+                                        "type": "integer"
+                                    },
+                                    "products": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "product_id": {
+                                                    "description": "Product Id",
+                                                    "type": "integer"
+                                                },
+                                                "amount": {
+                                                    "description": "Amount",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created - New Record",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "is_active": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2024-03-07T19:18:17.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2024-03-07T19:18:17.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request - Invalid Request Data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "field": {
+                                            "type": "string",
+                                            "example": "Request Validation Message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "417": {
+                        "description": "Expectation Failed - When an unexpected error occurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Record Create failed."
+                                        },
+                                        "error_message": {
+                                            "type": "string",
+                                            "example": "Error Message."
+                                        },
+                                        "error_file": {
+                                            "type": "string",
+                                            "example": "Error File."
+                                        },
+                                        "error_line": {
+                                            "type": "string",
+                                            "example": "Error Line."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sales/{id}": {
+            "get": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Return a Sale by a specific ID",
+                "operationId": "b883a60669af5795d051bcd68030b0a5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Query performed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "sales_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "amount": {
+                                            "type": "number",
+                                            "example": "8200.14"
+                                        },
+                                        "products": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "product_id": {
+                                                        "type": "integer",
+                                                        "example": "5"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Celular"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "example": "4100.07"
+                                                    },
+                                                    "amount": {
+                                                        "type": "integer",
+                                                        "example": "2"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found - When ID doesn't exist",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Content not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "417": {
+                        "description": "Expectation Failed - When an unexpected error occurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Operation failed."
+                                        },
+                                        "error_message": {
+                                            "type": "string",
+                                            "example": "Error Message."
+                                        },
+                                        "error_file": {
+                                            "type": "string",
+                                            "example": "Error File."
+                                        },
+                                        "error_line": {
+                                            "type": "string",
+                                            "example": "Error Line."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Add Product in a Sale by a specific ID",
+                "operationId": "e82899aca8dd9380b9dd5650e39097e5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "products"
+                                ],
+                                "properties": {
+                                    "products": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "product_id": {
+                                                    "description": "Product Id",
+                                                    "type": "integer"
+                                                },
+                                                "amount": {
+                                                    "description": "Amount",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created - New Record",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "is_active": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2024-03-07T19:18:17.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2024-03-07T19:18:17.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request - Invalid Request Data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "field": {
+                                            "type": "string",
+                                            "example": "Request Validation Message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "417": {
+                        "description": "Expectation Failed - When an unexpected error occurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Record Create failed."
+                                        },
+                                        "error_message": {
+                                            "type": "string",
+                                            "example": "Error Message."
+                                        },
+                                        "error_file": {
+                                            "type": "string",
+                                            "example": "Error File."
+                                        },
+                                        "error_line": {
+                                            "type": "string",
+                                            "example": "Error Line."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Sales"
+                ],
+                "summary": "Cancel a Sale by a specific ID",
+                "operationId": "db5fd21bad66681f389143608641a313",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Record Deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "is_active": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2024-03-07T19:18:17.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2024-03-07T19:18:17.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found - When ID doesn't exist",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Content not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "417": {
+                        "description": "Expectation Failed - When an unexpected error occurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Operation failed."
+                                        },
+                                        "error_message": {
+                                            "type": "string",
+                                            "example": "Error Message."
+                                        },
+                                        "error_file": {
+                                            "type": "string",
+                                            "example": "Error File."
+                                        },
+                                        "error_line": {
+                                            "type": "string",
+                                            "example": "Error Line."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
