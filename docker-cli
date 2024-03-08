@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+#
+# dockli - exec commands inside an container
+#
+# created: 2023-08-09
+# author: albert r c guedes (albert@teko.net.br)
+#
+# Licensed by MIT License
+#
+set -e
+
+# Show help message.
+function help() {
+    echo ''
+    echo 'dockli - exec commands inside an container'
+    echo ''
+    echo 'Usage:'
+    echo '  dockli <COMMAND>'
+    echo ''
+    echo '<COMMAND> is the command to be executed inside the container.'
+    echo ''
+}
+
+# Verify if no argument was given.
+if [ $# -eq 0 ]; then
+    echo ''
+    echo 'WARNING: Argument not given.'
+
+    help
+
+    exit 1
+fi
+
+# Set the docker path.
+# DOCKER="/usr/bin/docker"
+# DOCKER="$(which docker)"
+
+# Comando docker no windows
+DOCKER="docker"
+
+# Verify if the docker is on system.
+if ! command -v $DOCKER >/dev/null; then
+    echo "'$DOCKER' is required, but it's not found. Aborting."
+    exit 1
+fi
+
+# Docker options:
+# --interative : Enable interation (input) with the container.
+# --tty : Allow a pseudo-TTY (terminal) to the container, enable the correct
+#         exibition of the output on terminal.
+# --user : Set the guest user id inside the container as the host user id,
+#          using the command 'id -u' to retrieve the ID of host user.
+#
+OPTIONS="--interactive --tty --user $(id -u)"
+
+# The name of the container that store the source code.
+CONTAINER='adorei-container'
+
+# Verify if container dont exists.
+if ! $DOCKER ps -a --format "{{.Names}}" | grep -q $CONTAINER; then
+    echo "Container '$CONTAINER' dont exists. Aborting."
+    exit 1
+fi
+
+# Docker command is executed with host user id to avoid conflit beetween host
+# and guest files permissions.
+#
+# REMEMBER: all commands are executed on WORKDIR directory defined on dockerfile
+# of the container.
+#
+CMD="$DOCKER exec $OPTIONS $CONTAINER"
+
+# Exec the command on docker container.
+$CMD $@ || exit 1
+
+exit 0
+
+# The End.

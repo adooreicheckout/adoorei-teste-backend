@@ -1,0 +1,17 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "build-docs": "npx insomnia-documenter --config ./docs/insomnia.json -o ./public/docs -l ./public/logo.png -d '/docs'"
+    },
+    "devDependencies": {
+        "axios": "^1.6.4",
+        "laravel-vite-plugin": "^1.0.0",
+        "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "insomnia-documenter": "^0.5.5"
+    }
+}

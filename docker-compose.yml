@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # Custom name for the container.
+    container_name: adorei-container
+    ports:
+      - "8001:80"
+    depends_on:
+      - db
+    volumes:
+      - ./app:/var/www/html
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
