@@ -9,6 +9,8 @@ use App\Models\Sale;
 
 class SaleService
 {
+    private const LIMIT = 10;
+
     public static function create(Request $request): object
     {
         $data = $request->all();
@@ -70,7 +72,7 @@ class SaleService
             return new LengthAwarePaginator(
                 $formattedSale,
                 $sale->total(),
-                $request->limit,
+                $request->limit ? $request->limit : self::LIMIT,
                 $request->page,
                 ['path' => $request->url()]
             );

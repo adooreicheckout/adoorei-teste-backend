@@ -1,21 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## ABC-STORE-BACKEND
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## CLOUD-BACKEND
-
-Back-end da Loja ABC desenvolvido em Laravel 10 e Mysql, que disponibiliza APIs Rest.
+```
+Back-end da Loja ABC que disponibiliza APIs Rest. A estrutura do projeto usa containers gerenciados pelo Docker. Solução desenvolvida em Laravel 10 e Mysql, com a documentação via Postaman e Swagger.
+```
 
 ## Documentação
 
+- Caminho dos arquivos de Requests do Postman
+
+```
+/ABC-STORE-BACKEND/documentation/requests/
+```
+
+- Endereço da Documentação interativa via Swagger
+
+```
+http://localhost:8088/api/documentation/
+```
 
 ## Configuração
 
-Siga os seguintes passos para configurar a Aplicação:
+- Clone o projeto
 
+```
+git clone git@github.com:juniorns/abc-store-backend.git
+```
 
+- Na raiz do Projeto execute o comando para criar os containers
+
+```
+docker-compose up
+```
+
+- Conecte no container do php e instale as dependências do Laravel
+
+```
+composer install
+```
+
+- Crie o arquivo .env
+
+```
+cp .env.example .env
+```
+
+- Gere a nova chave para o Laravel
+
+```
+php artisan key:generate
+```
+
+- Url da instalação Laravel
+
+```
+http://localhost:8090
+```
+
+- Crie os objetos no banco de dados
+
+```
+php artisan migrate:fresh
+```
+
+- Popule as tabelas do banco de dados
+
+```
+php artisan db:seed
+```
+
+- Url base da API
+
+```
+http://localhost:8090/api
+```
+
+- Para acessar o MySql via PhpMyAdmin
+
+```
+Url: http://localhost:8183/
+Server: mysql
+Usuário: root
+Senha: root
+Database: abc_store
+```
