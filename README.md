@@ -53,7 +53,7 @@ php artisan key:generate
 - Url da instalação Laravel
 
 ```
-http://localhost:8090
+http://localhost:8088
 ```
 
 - Crie os objetos no banco de dados
@@ -66,12 +66,6 @@ php artisan migrate:fresh
 
 ```
 php artisan db:seed
-```
-
-- Url base da API
-
-```
-http://localhost:8090/api
 ```
 
 - Para acessar o MySql via PhpMyAdmin
