@@ -11,6 +11,10 @@ class Sale extends Model
         'is_active',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
+
     public function saleProduct()
     {
         return $this->hasMany(SaleProduct::class, 'sales_id', 'id');

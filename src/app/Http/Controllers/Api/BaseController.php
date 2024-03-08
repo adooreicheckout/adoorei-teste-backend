@@ -9,6 +9,12 @@ use App\Services\ErrorService;
 use Illuminate\Http\Request;
 use Throwable;
 
+/**
+ * @OA\Info(
+ *     version="1.0",
+ *     title="API - ABC STORE"
+ * ),
+ */
 abstract class BaseController
 {
     protected $serviceClass;
