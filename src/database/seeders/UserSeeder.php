@@ -8,13 +8,13 @@ use App\Models\User;
 
 class UserSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         User::create([
             'name' => 'Administrador',
             'email' => 'admin@admin.com',
-            'email_verified_at' => now(),
             'password' => Hash::make('123456'),
+            'is_active' => 1
         ]);
     }
 }
