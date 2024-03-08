@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'products'], function () {
     Route::get('', [App\Http\Controllers\Api\ProductsController::class, 'index']);
 });
+
+Route::group(['prefix' => 'sales'], function () {
+    Route::get('', [App\Http\Controllers\Api\SalesController::class, 'index']);
+    Route::post('', [App\Http\Controllers\Api\SalesController::class, 'store']);
+    Route::get('{id}', [App\Http\Controllers\Api\SalesController::class, 'show']);
+    Route::put('{id}', [App\Http\Controllers\Api\SalesController::class, 'addProducts']);
+    Route::patch('{id}', [App\Http\Controllers\Api\SalesController::class, 'cancel']);
+});
